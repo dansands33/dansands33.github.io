@@ -26,3 +26,6 @@ assets/
 # Python bytecode caches
 __pycache__/
 *.pyc
+
+# crest generator script (dev-only; crests are pre-rendered to css/themes/*.txt)
+scripts/
