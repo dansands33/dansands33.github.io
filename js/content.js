@@ -116,7 +116,7 @@
     forge: [
       "        \\     /",
       "         \\   /",
-      "       ---(+)---",
+      "       ---(+)",
       "         /   \\",
       "        /     \\",
       "       /_____\\",
@@ -154,7 +154,7 @@
     dawn: [
       "         )  (  )",
       "        (    )",
-      "       .-\"\"\"\"\"-.",
+      "       .-\"\"\"\"\"\"-.",
       "      /  ______  \\",
       "     |  /      \\  |",
       "     | |  ~~~~  | |",
@@ -174,4 +174,19 @@
     LINKS,
     email: () => EMAIL_PARTS.join(""),
   };
+
+  // ---------- load per-theme ASCII crests from css/themes/<name>.txt ----------
+  // Inline CRESTS above is the synchronous fallback (renders instantly); once the
+  // .txt files load we override each entry with the file's exact contents.
+  const content = window.DSS.content;
+  const CREST_FILES = ["aurelius","starfield","forge","mist","sunset","dawn"];
+  const CRESTS_READY = Promise.all(
+    CREST_FILES.map((name) =>
+      fetch(`css/themes/${name}.txt`)
+        .then((r) => (r.ok ? r.text() : Promise.reject()))
+        .then((txt) => { content.CRESTS[name] = txt.replace(/\r\n/g, "\n").replace(/\n+$/,"").split("\n"); })
+        .catch(() => { /* keep inline fallback for this theme */ })
+    )
+  );
+  window.DSS.content.CRESTS_READY = CRESTS_READY;
 })();

@@ -180,16 +180,21 @@
   /* ---------- palette selector (persisted, order from HTML) ---------- */
   const swatches = document.querySelectorAll(".swatch");
   const crestEl = document.querySelector(".ascii-crest");
+  function setCrest(name) {
+    if (crestEl && DSS.content.CRESTS[name]) crestEl.textContent = DSS.content.CRESTS[name].join("\n");
+  }
   function applyTheme(name) {
     const known = [...swatches].map((s) => s.dataset.set);
     if (!known.includes(name)) name = "sunset";
     document.documentElement.setAttribute("data-theme", name);
     swatches.forEach((s) => s.setAttribute("aria-pressed", String(s.dataset.set === name)));
-    if (crestEl && DSS.content.CRESTS[name]) crestEl.textContent = DSS.content.CRESTS[name].join("\n");
+    setCrest(name);
     if (typeof setMode === "function") setMode(name);
     try { localStorage.setItem("dss-theme", name); } catch (_) {}
   }
   swatches.forEach((s) => s.addEventListener("click", () => applyTheme(s.dataset.set)));
+  // once the .txt crests finish loading, re-render the current theme from file
+  if (DSS.content.CRESTS_READY) DSS.content.CRESTS_READY.then(() => setCrest(document.documentElement.getAttribute("data-theme")));
 
   /* ---------- language selector (persisted, default EN) ---------- */
   const langBtns = document.querySelectorAll(".lang-btn");

@@ -103,7 +103,7 @@ body{
 }
 .glyph{margin-bottom:1.2rem;transform:translateY(20px);opacity:0;animation:rise 1s ease forwards .6s}
 .ascii-crest{
-  font-family:var(--mono);font-size:clamp(.55rem,1.4vw,.8rem);line-height:1;
+  font-family:var(--mono);font-size:clamp(.4rem,1vw,.56rem);line-height:1;
   color:var(--gold);text-shadow:0 0 18px rgba(var(--rgb-gold),.5);
   filter:drop-shadow(0 0 10px rgba(var(--rgb-gold),.25));
   background:linear-gradient(115deg,var(--gold) 20%,#fff8e0 42%,var(--gold) 60%);
@@ -129,10 +129,14 @@ body{
 }
 
 .tagline{
-  font-size:clamp(1.15rem,3.4vw,2rem);font-weight:300;max-width:20ch;
+  font-size:clamp(1.15rem,3.4vw,2rem);font-weight:300;max-width:22ch;
   line-height:1.35;margin-bottom:1.6rem;color:var(--ink);
   opacity:0;animation:rise .9s ease forwards 1.25s;
 }
+/* tagline line-breaks: desktop = 2 lines (break only before the cool phrase),
+   mobile = 3 lines (.t1 also breaks before "into") */
+.tagline .tl-break{display:inline}
+.tagline .t2{display:block}
 .tagline .hot{color:var(--hot);font-weight:500;text-shadow:0 0 20px rgba(255,92,58,.35)}
 .tagline .cool{color:var(--cool);font-weight:500;text-shadow:0 0 20px rgba(56,225,255,.35)}
 

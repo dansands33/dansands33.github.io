@@ -7,10 +7,17 @@
   --rgb-hot:255,92,58; --rgb-cool:56,225,255; --rgb-cool2:108,123,255; --rgb-gold:217,178,91;
   --crest-shimmer:shimmer 6s linear infinite;
 }
-/* hero crest uses the theme accent */
+/* hero crest: sunset gradient — orange → purple across the cyberpunk sun,
+   built from theme tokens (--hot-2 / --hot = orange … --cool-2 = purple) */
 [data-theme="sunset"] .ascii-crest{
-  color:var(--hot);text-shadow:0 0 18px rgba(var(--rgb-hot),.5);
-  filter:drop-shadow(0 0 10px rgba(var(--rgb-hot),.25));
-  background:linear-gradient(115deg,var(--hot) 20%,#fff 42%,var(--hot) 60%);
-  background-size:250% 100%;-webkit-background-clip:text;background-clip:text;
+  color:transparent;text-shadow:none;
+  background:linear-gradient(115deg,var(--hot-2) 0%,var(--hot) 32%,var(--cool-2) 100%);
+  background-size:100% 100%;-webkit-background-clip:text;background-clip:text;
+  /* keep the glow, tinted orange→purple, and let it breathe */
+  filter:drop-shadow(0 0 10px rgba(var(--rgb-hot),.30)) drop-shadow(0 0 18px rgba(var(--rgb-cool2),.15));
+  animation:sunset-crest 4.5s ease-in-out infinite;
+}
+@keyframes sunset-crest{
+  0%,100%{filter:drop-shadow(0 0 10px rgba(var(--rgb-hot),.30)) drop-shadow(0 0 18px rgba(var(--rgb-cool2),.15))}
+  50%    {filter:drop-shadow(0 0 16px rgba(var(--rgb-hot),.50)) drop-shadow(0 0 28px rgba(var(--rgb-cool2),.32))}
 }

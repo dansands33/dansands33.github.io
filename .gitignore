@@ -11,6 +11,7 @@ node_modules/
 
 # python venv for the ascii_crest converter (Pillow)
 .venv/
+__pycache__/
 
 # secrets — never commit (none currently present, but guard anyway)
 .env
