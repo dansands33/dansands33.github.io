@@ -10,7 +10,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;700&family=Cinzel:wght@500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/base.css" />
+<!-- theme palettes (all linked so switching is instant; each only sets vars for its [data-theme]) -->
+<link rel="stylesheet" href="css/themes/sunset.css" />
+<link rel="stylesheet" href="css/themes/forge.css" />
+<link rel="stylesheet" href="css/themes/dawn.css" />
+<link rel="stylesheet" href="css/themes/mist.css" />
+<link rel="stylesheet" href="css/themes/starfield.css" />
+<link rel="stylesheet" href="css/themes/aurelius.css" />
 </head>
 <body>
 <canvas id="bg-field" aria-hidden="true"></canvas>
@@ -83,7 +90,10 @@
     </div>
 
     <p class="wip">
-      <span class="wip-dot"></span> <span data-i18n="wip">this signal is under construction — phase 01 of many.</span>
+      <span class="wip-dot"></span>
+      <span class="wip-text">
+        <span data-i18n="wip_pre">this signal is under construction</span><span class="wip-break" aria-hidden="true"> — </span><span data-i18n="wip_post">phase 01 of many.</span>
+      </span>
     </p>
   </section>
 
@@ -105,17 +115,25 @@
     <!-- palette selector -->
     <div class="palette" role="group" aria-label="Color theme">
       <span class="plabel">theme</span>
-      <button class="swatch sw-sunset"   data-set="sunset"   data-tip="sunset · techy orange ⇄ cyan" aria-label="Sunset theme"></button>
-      <button class="swatch sw-forge"    data-set="forge"    data-tip="forge · fire orange red yellow" aria-label="Forge theme"></button>
-      <button class="swatch sw-dawn"     data-set="dawn"     data-tip="dawn · warm morning" aria-label="Dawn theme"></button>
-      <button class="swatch sw-mist"     data-set="mist"     data-tip="mist · forest + white fog" aria-label="Mist theme"></button>
-      <button class="swatch sw-starfield" data-set="starfield" data-tip="Ad Astra · space + rockets" aria-label="Ad Astra theme"></button>
-      <button class="swatch sw-aurelius" data-set="aurelius" data-tip="aurelius · black + gold" aria-label="Aurelius black and gold theme"></button>
+      <button class="swatch sw-aurelius" data-set="aurelius" data-tip="Aurelius · Black + Gold" aria-label="Aurelius Black + Gold theme"></button>
+      <button class="swatch sw-starfield" data-set="starfield" data-tip="Ad Astra · Space + Rockets" aria-label="Ad Astra theme"></button>
+      <button class="swatch sw-forge"    data-set="forge"    data-tip="Forge · Fire Orange Red Yellow" aria-label="Forge theme"></button>
+      <button class="swatch sw-mist"     data-set="mist"     data-tip="Misty Forest · Forest + White Fog" aria-label="Misty Forest theme"></button>
+      <button class="swatch sw-sunset"   data-set="sunset"   data-tip="Sunset · Techy Orange ⇄ Cyan" aria-label="Sunset theme"></button>
+      <button class="swatch sw-dawn"     data-set="dawn"     data-tip="Dawn · Warm Morning" aria-label="Dawn theme"></button>
     </div>
   </div>
 
 </main>
 
-<script src="js/main.js"></script>
+<!-- content (i18n + copy) → theme animations register on window.DSS.THEMES → shared runtime boots + runs the loop -->
+<script src="js/content.js"></script>
+<script src="js/themes/sunset.js"></script>
+<script src="js/themes/forge.js"></script>
+<script src="js/themes/dawn.js"></script>
+<script src="js/themes/mist.js"></script>
+<script src="js/themes/starfield.js"></script>
+<script src="js/themes/aurelius.js"></script>
+<script src="js/shared.js"></script>
 </body>
 </html>

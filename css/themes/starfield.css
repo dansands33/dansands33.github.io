@@ -1,0 +1,15 @@
+/* THEME: starfield (Ad Astra) — deep space · white stars · rocket-exhaust orange */
+[data-theme="starfield"]{
+  --bg:#050a16; --bg-2:#0a1224; --ink:#eaf0fb; --ink-dim:#7f8db0;
+  --hot:#ff8a3d; --hot-2:#ffc24d; --cool:#6fa8ff; --cool-2:#9c7bff;
+  --gold:#d9b25b;
+  --glass:rgba(16,26,50,0.46); --glass-brd:rgba(120,160,240,0.20);
+  --rgb-hot:255,138,61; --rgb-cool:111,168,255; --rgb-cool2:156,123,255; --rgb-gold:217,178,91;
+  --crest-shimmer:shimmer 9s linear infinite;
+}
+[data-theme="starfield"] .ascii-crest{
+  color:var(--cool);text-shadow:0 0 18px rgba(var(--rgb-cool),.5);
+  filter:drop-shadow(0 0 10px rgba(var(--rgb-cool),.25));
+  background:linear-gradient(115deg,var(--cool) 20%,#fff 42%,var(--cool) 60%);
+  background-size:250% 100%;-webkit-background-clip:text;background-clip:text;
+}

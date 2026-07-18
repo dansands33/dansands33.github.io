@@ -1,0 +1,16 @@
+/* THEME: sunset (default) — techy orange ⇄ cyan */
+[data-theme="sunset"]{
+  --bg:#05070d; --bg-2:#0a0e18; --ink:#e8ecf4; --ink-dim:#8892a6;
+  --hot:#ff5c3a; --hot-2:#ff8a3d; --cool:#38e1ff; --cool-2:#6c7bff;
+  --gold:#d9b25b;
+  --glass:rgba(20,28,44,0.45); --glass-brd:rgba(120,160,220,0.18);
+  --rgb-hot:255,92,58; --rgb-cool:56,225,255; --rgb-cool2:108,123,255; --rgb-gold:217,178,91;
+  --crest-shimmer:shimmer 6s linear infinite;
+}
+/* hero crest uses the theme accent */
+[data-theme="sunset"] .ascii-crest{
+  color:var(--hot);text-shadow:0 0 18px rgba(var(--rgb-hot),.5);
+  filter:drop-shadow(0 0 10px rgba(var(--rgb-hot),.25));
+  background:linear-gradient(115deg,var(--hot) 20%,#fff 42%,var(--hot) 60%);
+  background-size:250% 100%;-webkit-background-clip:text;background-clip:text;
+}

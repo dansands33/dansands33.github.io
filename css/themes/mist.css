@@ -1,0 +1,16 @@
+/* THEME: mist (Misty Forest) — forest greens · light blue · wood · white mist */
+[data-theme="mist"]{
+  --bg:#0c130d; --bg-2:#131d15; --ink:#eef4ee; --ink-dim:#8fa896;
+  --hot:#4fae6d; --hot-2:#7fd89a; --cool:#8fd0e6; --cool-2:#3f7a58;
+  --gold:#c8a878;
+  --glass:rgba(18,32,22,0.44); --glass-brd:rgba(150,200,170,0.18);
+  --rgb-hot:79,174,109; --rgb-cool:143,208,230; --rgb-cool2:63,122,88; --rgb-gold:200,168,120;
+  --mist-white:235,242,236; --mist-wood:74,54,38;
+  --crest-shimmer:shimmer 8s linear infinite;
+}
+[data-theme="mist"] .ascii-crest{
+  color:var(--hot);text-shadow:0 0 18px rgba(var(--rgb-hot),.5);
+  filter:drop-shadow(0 0 10px rgba(var(--rgb-hot),.25));
+  background:linear-gradient(115deg,var(--hot) 20%,#fff 42%,var(--hot) 60%);
+  background-size:250% 100%;-webkit-background-clip:text;background-clip:text;
+}

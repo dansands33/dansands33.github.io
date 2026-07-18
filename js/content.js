@@ -1,0 +1,177 @@
+/* ============================================================
+   DAN SANDS // signal — Content module
+   Localized strings + theme-specific copy (e.g. the aurelius "rain" lines).
+   Exposed on window.DSS.content for the shared runtime + theme animations.
+   ============================================================ */
+(function () {
+  "use strict";
+  window.DSS = window.DSS || {};
+  // theme-animation registry — populated by js/themes/*.js, read by shared.js
+  window.DSS.THEMES = window.DSS.THEMES || {};
+
+  // ---------- i18n (hero copy + rotating subline) ----------
+  const I18N = {
+    en: {
+      eyebrow: "incoming transmission",
+      tagline_pre: "I help teams turn",
+      tagline_hot: "chaos",
+      tagline_mid: "into",
+      tagline_cool: "clear, working systems",
+      open_channel: "open channel",
+      wip_pre: "this signal is under construction",
+      wip_post: "phase 01 of many.",
+      phrases: [
+        "product operations · ai workflows · internal tools",
+        "8+ years turning ambiguity into roadmaps",
+        "distributed teams · latam ⇄ north america",
+        "quality, clarity, and momentum — by design",
+        "how could I help you?",
+      ],
+    },
+    es: {
+      eyebrow: "transmisión entrante",
+      tagline_pre: "Ayudo a equipos a convertir",
+      tagline_hot: "el caos",
+      tagline_mid: "en",
+      tagline_cool: "sistemas claros y funcionales",
+      open_channel: "abrir canal",
+      wip_pre: "esta señal está en construcción",
+      wip_post: "fase 01 de varias.",
+      phrases: [
+        "operaciones de producto · flujos de ia · herramientas internas",
+        "8+ años convirtiendo ambigüedad en hojas de ruta",
+        "equipos distribuidos · latam ⇄ norteamérica",
+        "calidad, claridad y momentum — por diseño",
+        "¿cómo podría ayudarte?",
+      ],
+    },
+  };
+
+  // ---------- theme-specific copy ----------
+  // aurelius shows slow-falling "chapters" of who I am; visible text only.
+  const RAIN_LINES = [
+    "clarity is a kindness",
+    "ship small, learn fast",
+    "the best system is the one people actually use",
+    "i turn chaos into clear working systems",
+    "distributed teams across latam and north america",
+    "ai should remove friction, not add theater",
+    "listen first, build second",
+    "momentum beats perfection",
+    "bridging tech and the humans it serves",
+    "every roadmap is a story we agree to tell",
+    "quality is not a phase, it is a stance",
+    "lead with context, not control",
+  ];
+  const RAIN_LINES_ES = [
+    "la claridad es una amabilidad",
+    "entrega pequeño, aprende rápido",
+    "el mejor sistema es el que la gente usa",
+    "convierto el caos en sistemas claros",
+    "equipos distribuidos por latam y norteamérica",
+    "la ia debe quitar fricción, no poner teatro",
+    "escucha primero, construye después",
+    "el momentum vence a la perfección",
+    "unir la tecnología con quien la usa",
+    "cada roadmap es una historia que acordamos",
+    "la calidad no es una fase, es una postura",
+    "lidera con contexto, no con control",
+  ];
+
+  // ---------- contact channels (email assembled at runtime; never in HTML source) ----------
+  const EMAIL_PARTS = ["DanSands", ".Pro", "@", "gmail", ".", "com"];
+  const LINKS = {
+    linkedin: "https://www.linkedin.com/in/DanDataDrivenDreamer",
+    github:   "https://github.com/dansands33",
+  };
+
+  // ---------- per-theme hero crests (a unique ASCII icon per theme) ----------
+  const CRESTS = {
+    // aurelius — Greek head / classical bust
+    aurelius: [
+      "      .-\"\"\"\"-.",
+      "     /  .--.  \\",
+      "    |  | () |  |",
+      "    |   \\__/   |",
+      "     \\        /",
+      "    __\\'    '/__",
+      "   /  _      _  \\",
+      "  |  (_)    (_)  |",
+      "   \\   '----'   /",
+      "    '----------'",
+    ],
+    // starfield (Ad Astra) — astronaut helmet
+    starfield: [
+      "       .------.",
+      "      /  .--.  \\",
+      "     |  /    \\  |",
+      "     | |  /\\  | |",
+      "     | | (  ) | |",
+      "     |  \\    /  |",
+      "      \\  '--'  /",
+      "       '------'",
+      "        |    |",
+    ],
+    // forge — shield with crossed swords
+    forge: [
+      "        \\     /",
+      "         \\   /",
+      "       ---(+)---",
+      "         /   \\",
+      "        /     \\",
+      "       /_____\\",
+      "      |         |",
+      "      |  .---.  |",
+      "      | (     ) |",
+      "      |  '---'  |",
+      "       \\_______/",
+    ],
+    // mist (Misty Forest) — a stand of pines
+    mist: [
+      "        /\\      /\\",
+      "       /  \\    /  \\",
+      "      /    \\  /    \\",
+      "     /  /\\  \\/  /\\  \\",
+      "    /  /  \\    /  \\  \\",
+      "   /__/    \\  /    \\__\\",
+      "  |  |      \\/      |  |",
+      "  \\__/                \\__/",
+      "     |        |        |",
+      "     |        |        |",
+    ],
+    // sunset — cyberpunk sun on the horizon
+    sunset: [
+      "        .   .   .",
+      "      _ ___________ _",
+      "     / \\___________/ \\",
+      "    |  .  .   .  .  |",
+      "    | .   .   .   . |",
+      "     \\__ _ _ _ _ __/",
+      "    ~~~~~  ~~~~  ~~~~",
+      "   --  --  --  --  --",
+    ],
+    // dawn — cup of coffee with steam
+    dawn: [
+      "         )  (  )",
+      "        (    )",
+      "       .-\"\"\"\"\"-.",
+      "      /  ______  \\",
+      "     |  /      \\  |",
+      "     | |  ~~~~  | |",
+      "     |  \\______/  |",
+      "      \\________/",
+      "       |      |",
+      "       |______|",
+    ],
+  };
+
+  window.DSS.content = {
+    I18N,
+    RAIN_LINES,
+    RAIN_LINES_ES,
+    CRESTS,
+    EMAIL_PARTS,
+    LINKS,
+    email: () => EMAIL_PARTS.join(""),
+  };
+})();

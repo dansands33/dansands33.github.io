@@ -13,3 +13,6 @@ node_modules/
 .env
 .env.*
 *.secret
+
+# working notes / handover docs — not part of the published site
+HANDOVER*.md

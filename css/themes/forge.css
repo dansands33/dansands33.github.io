@@ -1,0 +1,15 @@
+/* THEME: forge — fire: rich orange · deep red · bright yellow */
+[data-theme="forge"]{
+  --bg:#0c0503; --bg-2:#1a0805; --ink:#ffeede; --ink-dim:#c08a6a;
+  --hot:#ff6a1f; --hot-2:#ffd23f; --cool:#ff3b1f; --cool-2:#ff9500;
+  --gold:#ffb347;
+  --glass:rgba(46,18,8,0.44); --glass-brd:rgba(255,140,60,0.22);
+  --rgb-hot:255,106,31; --rgb-cool:255,59,31; --rgb-cool2:255,149,0; --rgb-gold:255,210,63;
+  --crest-shimmer:shimmer 6s linear infinite;
+}
+[data-theme="forge"] .ascii-crest{
+  color:var(--hot);text-shadow:0 0 18px rgba(var(--rgb-hot),.5);
+  filter:drop-shadow(0 0 10px rgba(var(--rgb-hot),.25));
+  background:linear-gradient(115deg,var(--hot) 20%,#fff 42%,var(--hot) 60%);
+  background-size:250% 100%;-webkit-background-clip:text;background-clip:text;
+}

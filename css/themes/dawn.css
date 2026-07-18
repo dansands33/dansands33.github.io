@@ -1,0 +1,15 @@
+/* THEME: dawn — morning: warm cream · coffee · soft rose/blue */
+[data-theme="dawn"]{
+  --bg:#151019; --bg-2:#211826; --ink:#fbf2ec; --ink-dim:#c2a89c;
+  --hot:#ff9e6d; --hot-2:#ffcf9e; --cool:#89a7ff; --cool-2:#c79bff;
+  --gold:#ffca8a;
+  --glass:rgba(52,38,44,0.42); --glass-brd:rgba(255,190,160,0.22);
+  --rgb-hot:255,158,109; --rgb-cool:137,167,255; --rgb-cool2:199,155,255; --rgb-gold:255,202,138;
+  --crest-shimmer:shimmer 7s linear infinite;
+}
+[data-theme="dawn"] .ascii-crest{
+  color:var(--hot);text-shadow:0 0 18px rgba(var(--rgb-hot),.5);
+  filter:drop-shadow(0 0 10px rgba(var(--rgb-hot),.25));
+  background:linear-gradient(115deg,var(--hot) 20%,#fff 42%,var(--hot) 60%);
+  background-size:250% 100%;-webkit-background-clip:text;background-clip:text;
+}
