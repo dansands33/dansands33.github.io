@@ -9,6 +9,9 @@ Thumbs.db
 *.log
 node_modules/
 
+# python venv for the ascii_crest converter (Pillow)
+.venv/
+
 # secrets — never commit (none currently present, but guard anyway)
 .env
 .env.*
