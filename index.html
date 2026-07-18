@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DAN SANDS // signal</title>
+<meta name="description" content="Dan Sands — product-oriented technology leader. I help teams turn chaos into clear, working systems. Colombia · Canada · Working globally, remote." />
+<meta name="robots" content="index, follow" />
+<!-- No third-party scripts. No trackers. No cookies. Privacy-first by construction. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;700&family=Cinzel:wght@500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<canvas id="bg-field" aria-hidden="true"></canvas>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- boot sequence -->
+<div id="boot" aria-hidden="true">
+  <pre id="boot-text"></pre>
+</div>
+
+<main id="stage" class="hidden">
+  <!-- HUD corners -->
+  <div class="hud hud-tl" aria-hidden="true">
+    <span class="hud-tick">◢</span>
+    <span class="hud-label">SYS // DAN.SANDS</span>
+  </div>
+  <div class="hud hud-tr" aria-hidden="true">
+    <span class="hud-label">STATUS: <b class="pulse">ONLINE</b></span>
+    <span class="hud-tick">◣</span>
+  </div>
+  <div class="hud hud-bl" aria-hidden="true">
+    <span class="hud-tick">◥</span>
+    <span class="hud-label" id="clock">--:--:-- UTC</span>
+  </div>
+  <div class="hud hud-br" aria-hidden="true">
+    <span class="hud-label">COL · CAN · REMOTE</span>
+    <span class="hud-tick">◤</span>
+  </div>
+
+  <section class="hero">
+    <div class="glyph" aria-hidden="true">
+<pre class="ascii-crest">
+        /\
+       /  \
+      / /\ \
+     / /  \ \
+    /_/____\_\
+    \  ____  /
+     \ \  / /
+      \ \/ /
+       \  /
+        \/
+</pre>
+    </div>
+
+    <p class="eyebrow"><span class="bracket">[</span> <span data-i18n="eyebrow">incoming transmission</span> <span class="bracket">]</span></p>
+
+    <h1 class="title">
+      <span class="line" data-glitch="DAN SANDS">DAN SANDS</span>
+    </h1>
+
+    <p class="tagline">
+      <span data-i18n="tagline_pre">I help teams turn</span> <span class="hot" data-i18n="tagline_hot">chaos</span> <span data-i18n="tagline_mid">into</span>
+      <span class="cool" data-i18n="tagline_cool">clear, working systems</span>.
+    </p>
+
+    <p class="subline" id="rotator">
+      <span class="prompt">&gt;</span> <span id="rotor"></span><span class="caret">▊</span>
+    </p>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" id="contact-btn" href="#">
+        <span class="btn-glow"></span>
+        <span class="btn-label" data-i18n="open_channel">open channel</span>
+      </a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/DanDataDrivenDreamer" target="_blank" rel="noopener noreferrer">
+        <span class="btn-label">linkedin →</span>
+      </a>
+    </div>
+
+    <p class="wip">
+      <span class="wip-dot"></span> <span data-i18n="wip">this signal is under construction — phase 01 of many.</span>
+    </p>
+  </section>
+
+  <footer class="foot">
+    <span>© <span id="year"></span> DAN SANDS</span>
+    <span class="sep">·</span>
+    <span>built in the open · no trackers · no cookies</span>
+  </footer>
+
+  <!-- language + theme selectors (vertically centered, left edge) -->
+  <div class="side-selectors">
+    <!-- language selector -->
+    <div class="lang" role="group" aria-label="Language">
+      <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+      <span class="lang-sep">/</span>
+      <button class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
+    </div>
+
+    <!-- palette selector -->
+    <div class="palette" role="group" aria-label="Color theme">
+      <span class="plabel">theme</span>
+      <button class="swatch sw-sunset"   data-set="sunset"   data-tip="sunset · techy orange ⇄ cyan" aria-label="Sunset theme"></button>
+      <button class="swatch sw-forge"    data-set="forge"    data-tip="forge · fire orange red yellow" aria-label="Forge theme"></button>
+      <button class="swatch sw-dawn"     data-set="dawn"     data-tip="dawn · warm morning" aria-label="Dawn theme"></button>
+      <button class="swatch sw-mist"     data-set="mist"     data-tip="mist · forest + white fog" aria-label="Mist theme"></button>
+      <button class="swatch sw-starfield" data-set="starfield" data-tip="Ad Astra · space + rockets" aria-label="Ad Astra theme"></button>
+      <button class="swatch sw-aurelius" data-set="aurelius" data-tip="aurelius · black + gold" aria-label="Aurelius black and gold theme"></button>
+    </div>
+  </div>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

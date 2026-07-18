@@ -1,0 +1,15 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# local caches / logs
+.cache/
+*.log
+node_modules/
+
+# secrets — never commit (none currently present, but guard anyway)
+.env
+.env.*
+*.secret
