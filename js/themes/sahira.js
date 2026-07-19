@@ -1,5 +1,4 @@
-/* THEME ANIMATION: dawn (light) — soft drifting watercolor motes (calm morning)
-   Uses source-over blending (not additive) so it shows on a LIGHT background. */
+/* THEME ANIMATION: sahira — soft watercolor blooms (warm light theme) */
 (function () {
   "use strict";
   const DSS = window.DSS, T = DSS.THEMES;
@@ -7,27 +6,27 @@
   let motes = [];
   function seed() {
     const W = DSS.W, H = DSS.H;
-    const n = Math.min(54, Math.floor((W * H) / 28000));
+    const n = Math.min(46, Math.floor((W * H) / 30000));
     motes = Array.from({ length: n }, () => ({
-      x: Math.random() * W, y: Math.random() * H, r: Math.random() * 70 + 26,
-      vx: (Math.random() - 0.5) * 0.14, vy: (Math.random() - 0.5) * 0.12,
-      a: Math.random() * 0.06 + 0.03, hue: Math.random(),
+      x: Math.random() * W, y: Math.random() * H, r: Math.random() * 120 + 50,
+      vx: (Math.random() - 0.5) * 0.18, vy: (Math.random() - 0.5) * 0.14,
+      a: Math.random() * 0.05 + 0.025, hue: Math.random(),
     }));
   }
   function draw() {
     const ctx = DSS.ctx, W = DSS.W, H = DSS.H, mx = DSS.mx, my = DSS.my;
     ctx.clearRect(0, 0, W, H);
     ctx.globalCompositeOperation = "source-over";
-    const warm = rgb("--rgb-hot", "224,138,78"), rose = rgb("--rgb-cool", "196,106,134"), blue = rgb("--rgb-cool2", "125,159,214");
+    const copper = rgb("--rgb-hot", "176,106,51"), brown = rgb("--rgb-cool2", "122,77,44"), amber = rgb("--rgb-gold", "199,127,62");
     for (const m of motes) {
-      m.x += m.vx + mx * 0.18; m.y += m.vy + my * 0.14;
+      m.x += m.vx + mx * 0.2; m.y += m.vy + my * 0.16;
       if (m.x < -m.r) m.x = W + m.r; if (m.x > W + m.r) m.x = -m.r;
       if (m.y < -m.r) m.y = H + m.r; if (m.y > H + m.r) m.y = -m.r;
-      const col = m.hue < 0.5 ? warm : (m.hue < 0.8 ? rose : blue);
+      const col = m.hue < 0.5 ? copper : (m.hue < 0.8 ? amber : brown);
       const g = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r);
       g.addColorStop(0, `rgba(${col},${m.a})`); g.addColorStop(1, `rgba(${col},0)`);
       ctx.fillStyle = g; ctx.beginPath(); ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2); ctx.fill();
     }
   }
-  T.dawn = { seed, draw };
+  T.sahira = { seed, draw };
 })();

@@ -54,20 +54,27 @@
 
   /* ---------- rotating subline ---------- */
   const rotor = document.getElementById("rotor");
-  let rotorTimer = null;
+  let rotorTimer = null;   // most recently scheduled timeout (immediate cleanup hook)
+  let rotorGen = 0;        // generation token — invalidates stale loops after a lang switch
   function typeLoop() {
     if (reduce) { rotor.textContent = phrases[phrases.length - 1]; return; }
+    const gen = ++rotorGen;                  // this run's generation
+    const alive = () => gen === rotorGen;    // true only while this loop is the current one
     let pi = 0;
-    const show = (t) => { rotor.textContent = t; };
+    const show = (t) => { if (alive()) rotor.textContent = t; };
     function typePhrase() {
+      if (!alive()) return;
       const txt = phrases[pi]; let ci = 0;
       (function type() {
+        if (!alive()) return;
         show(txt.slice(0, ci));
         if (ci < txt.length) { ci++; rotorTimer = setTimeout(type, 34); }
         else { rotorTimer = setTimeout(erase, 2200); }
       })();
       function erase() {
+        if (!alive()) return;
         (function del() {
+          if (!alive()) return;
           ci--;
           show(txt.slice(0, Math.max(ci, 0)));
           if (ci > 0) { rotorTimer = setTimeout(del, 16); }
@@ -77,7 +84,12 @@
     }
     typePhrase();
   }
-  function restartRotor() { if (rotorTimer) clearTimeout(rotorTimer); rotor.textContent = ""; typeLoop(); }
+  function restartRotor() {
+    rotorGen++;                              // invalidate any in-flight loop from the old language
+    if (rotorTimer) clearTimeout(rotorTimer);
+    rotor.textContent = "";
+    typeLoop();
+  }
 
   /* ---------- clock ---------- */
   function tickClock() {
@@ -233,6 +245,7 @@
   let savedTheme = "sunset"; try { savedTheme = localStorage.getItem("dss-theme") || "sunset"; } catch (_) {}
   applyTheme(savedTheme);   // also seeds the canvas for the saved theme
   runBoot();
-  typeLoop();
   startField();
+  // NOTE: the rotor is started by applyLang()→restartRotor() above, so do NOT start a
+  // second loop here — doing so made two competing loops write to #rotor at once.
 })();

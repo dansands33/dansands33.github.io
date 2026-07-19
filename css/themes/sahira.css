@@ -1,0 +1,43 @@
+/* THEME: sahira — white · warm brown · copper (light theme) */
+[data-theme="sahira"]{
+  --bg:#fbf6ef; --bg-2:#f3ebe0; --ink:#3d2b21; --ink-dim:#6f5a4a;
+  --hot:#a85f2a; --hot-2:#c47a3a; --cool:#8a5e34; --cool-2:#7a4d2c;
+  --gold:#9c5b27;
+  --glass:rgba(255,248,240,0.55); --glass-brd:rgba(176,106,51,0.22);
+  --rgb-hot:168,95,42; --rgb-cool:138,94,52; --rgb-cool2:122,77,44; --rgb-gold:156,91,39;
+  --crest-shimmer:shimmer 7s linear infinite;
+}
+/* hero crest: copper → cream shimmer (on white bg) */
+[data-theme="sahira"] .ascii-crest{
+  color:var(--hot);text-shadow:0 0 16px rgba(var(--rgb-hot),.28);
+  filter:drop-shadow(0 0 8px rgba(var(--rgb-hot),.20));
+  background:linear-gradient(115deg,var(--hot-2) 18%,var(--gold) 42%,var(--cool-2) 64%,var(--hot-2) 88%);
+  background-size:250% 100%;-webkit-background-clip:text;background-clip:text;
+}
+
+/* ===== light-theme surface overrides (dark-theme surfaces assume dark bg) ===== */
+/* title gradient was white→gray (invisible on white) → warm brown→copper */
+[data-theme="sahira"] .title .line{
+  background:linear-gradient(180deg,#3d2b21 0%,#7a4d2c 55%,#b06a33 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 0 50px rgba(176,106,51,.18);
+}
+/* swatch tooltip + contact modal were dark glass → light glass for contrast */
+[data-theme="sahira"] .swatch::after{
+  color:var(--ink);background:rgba(255,250,243,.96);border:1px solid var(--glass-brd);
+  box-shadow:0 4px 14px rgba(122,77,44,.18);
+}
+[data-theme="sahira"] #contact-modal{background:rgba(61,43,33,.45)}
+[data-theme="sahira"] .modal-card{
+  background:linear-gradient(160deg,rgba(255,251,245,.96),rgba(243,235,224,.98));
+  border:1px solid var(--glass-brd);
+  box-shadow:0 30px 80px rgba(122,77,44,.25),inset 0 1px 0 rgba(255,255,255,.8);
+}
+/* footer is washed out by base opacity:.6 on light bg → restore legibility */
+[data-theme="sahira"] .foot{opacity:.85}
+/* primary CTA: white text on copper→brown gradient (dark text fails on mid-tone bg) */
+[data-theme="sahira"] .btn-primary{
+  color:#fff;background:linear-gradient(135deg,var(--hot),var(--cool-2));
+  box-shadow:0 8px 30px rgba(var(--rgb-hot),.3),inset 0 1px 0 rgba(255,255,255,.22);
+}
+[data-theme="sahira"] .btn-primary:hover{box-shadow:0 12px 44px rgba(var(--rgb-hot),.45),inset 0 1px 0 rgba(255,255,255,.3)}

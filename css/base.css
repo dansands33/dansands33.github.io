@@ -129,12 +129,13 @@ body{
 }
 
 .tagline{
-  font-size:clamp(1.15rem,3.4vw,2rem);font-weight:300;max-width:22ch;
+  font-size:clamp(1.15rem,3.4vw,2rem);font-weight:300;max-width:92vw;
   line-height:1.35;margin-bottom:1.6rem;color:var(--ink);
   opacity:0;animation:rise .9s ease forwards 1.25s;
 }
 /* tagline line-breaks: desktop = 2 lines (break only before the cool phrase),
-   mobile = 3 lines (.t1 also breaks before "into") */
+   mobile = 3 lines (.t1 also breaks before "into"). Width is uncapped (full
+   available width) so longer languages (e.g. ES) don't get extra wraps. */
 .tagline .tl-break{display:inline}
 .tagline .t2{display:block}
 .tagline .hot{color:var(--hot);font-weight:500;text-shadow:0 0 20px rgba(255,92,58,.35)}
@@ -267,7 +268,8 @@ body{
 .swatch:hover::after{opacity:1;transform:translateY(-50%) translateX(0)}
 .sw-sunset{background:linear-gradient(135deg,#ff5c3a,#38e1ff);--sw-glow:rgba(56,225,255,.6)}
 .sw-forge{background:linear-gradient(135deg,#ff3b1f,#ff6a1f,#ffd23f);--sw-glow:rgba(255,106,31,.6)}
-.sw-dawn{background:linear-gradient(135deg,#ff9e6d,#c79bff,#89a7ff);--sw-glow:rgba(199,155,255,.6)}
+.sw-dawn{background:linear-gradient(135deg,#e08a4e,#c46a86,#7d9fd6);--sw-glow:rgba(196,106,134,.6)}
+.sw-sahira{background:linear-gradient(135deg,#fbf6ef 30%,#b06a33 65%,#7a4d2c);--sw-glow:rgba(176,106,51,.6)}
 .sw-mist{background:linear-gradient(135deg,#5ee6b0,#4fc8ff);--sw-glow:rgba(94,230,176,.6)}
 .sw-starfield{background:linear-gradient(135deg,#050a16 40%,#6fa8ff 75%,#ff8a3d);--sw-glow:rgba(111,168,255,.65)}
 .sw-aurelius{background:linear-gradient(135deg,#030303 45%,#e8c368);--sw-glow:rgba(232,195,104,.7)}

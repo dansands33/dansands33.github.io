@@ -1,15 +1,41 @@
-/* THEME: dawn — morning: warm cream · coffee · soft rose/blue */
+/* THEME: dawn (light) — warm cream · roasted coffee · soft rose · sky */
 [data-theme="dawn"]{
-  --bg:#151019; --bg-2:#211826; --ink:#fbf2ec; --ink-dim:#c2a89c;
-  --hot:#ff9e6d; --hot-2:#ffcf9e; --cool:#89a7ff; --cool-2:#c79bff;
-  --gold:#ffca8a;
-  --glass:rgba(52,38,44,0.42); --glass-brd:rgba(255,190,160,0.22);
-  --rgb-hot:255,158,109; --rgb-cool:137,167,255; --rgb-cool2:199,155,255; --rgb-gold:255,202,138;
+  --bg:#fbf3ea; --bg-2:#f3e7da; --ink:#3a2a22; --ink-dim:#6f5a4a;
+  --hot:#b15426; --hot-2:#d27a44; --cool:#a85076; --cool-2:#7d9fd6;
+  --gold:#9c5b27;
+  --glass:rgba(255,249,242,0.55); --glass-brd:rgba(224,138,78,0.22);
+  --rgb-hot:177,84,38; --rgb-cool:168,80,118; --rgb-cool2:125,159,214; --rgb-gold:156,91,39;
   --crest-shimmer:shimmer 7s linear infinite;
 }
+/* hero crest: coffee → rose shimmer (on white bg) */
 [data-theme="dawn"] .ascii-crest{
-  color:var(--hot);text-shadow:0 0 18px rgba(var(--rgb-hot),.5);
-  filter:drop-shadow(0 0 10px rgba(var(--rgb-hot),.25));
-  background:linear-gradient(115deg,var(--hot) 20%,#fff 42%,var(--hot) 60%);
+  color:var(--hot);text-shadow:0 0 16px rgba(var(--rgb-hot),.28);
+  filter:drop-shadow(0 0 8px rgba(var(--rgb-hot),.20));
+  background:linear-gradient(115deg,var(--hot) 18%,var(--gold) 42%,var(--cool) 64%,var(--hot) 88%);
   background-size:250% 100%;-webkit-background-clip:text;background-clip:text;
 }
+
+/* ===== light-theme surface overrides (dark-theme surfaces assume dark bg) ===== */
+[data-theme="dawn"] .title .line{
+  background:linear-gradient(180deg,#3a2a22 0%,#8a5440 55%,#c46a86 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 0 50px rgba(224,138,78,.18);
+}
+[data-theme="dawn"] .swatch::after{
+  color:var(--ink);background:rgba(255,250,244,.96);border:1px solid var(--glass-brd);
+  box-shadow:0 4px 14px rgba(122,77,44,.18);
+}
+[data-theme="dawn"] #contact-modal{background:rgba(58,42,34,.45)}
+[data-theme="dawn"] .modal-card{
+  background:linear-gradient(160deg,rgba(255,250,243,.96),rgba(243,231,218,.98));
+  border:1px solid var(--glass-brd);
+  box-shadow:0 30px 80px rgba(122,77,44,.22),inset 0 1px 0 rgba(255,255,255,.8);
+}
+/* footer is washed out by base opacity:.6 on light bg → restore legibility */
+[data-theme="dawn"] .foot{opacity:.85}
+/* primary CTA: white text on coffee→mauve gradient (dark text fails on mid-tone bg) */
+[data-theme="dawn"] .btn-primary{
+  color:#fff;background:linear-gradient(135deg,var(--hot),var(--cool));
+  box-shadow:0 8px 30px rgba(var(--rgb-hot),.3),inset 0 1px 0 rgba(255,255,255,.22);
+}
+[data-theme="dawn"] .btn-primary:hover{box-shadow:0 12px 44px rgba(var(--rgb-hot),.45),inset 0 1px 0 rgba(255,255,255,.3)}

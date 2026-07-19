@@ -163,6 +163,32 @@
       "       |      |",
       "       |______|",
     ],
+    // sahira — persian cat (white · brown · copper)
+    sahira: [
+      "                /\\        /\\",
+      "               /  \\      /  \\",
+      "              /    \\    /    \\",
+      "             |      \\  /      |",
+      "             |       \\/       |",
+      "              \\      ||      /",
+      "               \\  _  ||  _  /",
+      "                \\/ \\ || / \\/",
+      "               /     ||     \\",
+      "              |  .------.   |",
+      "              | /  /\\   \\   |",
+      "              | \\ (  )  /   |",
+      "               \\  \\____/    /",
+      "                \\   ||    /",
+      "                 \\  ||   /",
+      "                  \\ ||  /",
+      "                   \\|| /",
+      "                    \\/",
+      "        /\\          /    \\          /\\",
+      "       /  \\        /      \\        /  \\",
+      "      | () |      |        |      | () |",
+      "       \\__/        \\      /        \\__/",
+      "                    \\____/",
+    ],
   };
 
   window.DSS.content = {
@@ -179,7 +205,7 @@
   // Inline CRESTS above is the synchronous fallback (renders instantly); once the
   // .txt files load we override each entry with the file's exact contents.
   const content = window.DSS.content;
-  const CREST_FILES = ["aurelius","starfield","forge","mist","sunset","dawn"];
+  const CREST_FILES = ["aurelius","starfield","forge","mist","sunset","dawn","sahira"];
   const CRESTS_READY = Promise.all(
     CREST_FILES.map((name) =>
       fetch(`css/themes/${name}.txt`)
