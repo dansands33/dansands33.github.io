@@ -1,4 +1,29 @@
 <!DOCTYPE html>
+<!--
+  DAN SANDS // signal — index.html
+  ============================================================
+  The entire page. No framework, no build step — just markup.
+
+  This is EXPLORATION, not a finished product. (I have a design
+  background, so a plain single-page site was never going to be
+  enough — I had to push the hero into a small mood playground.)
+
+  Structure:
+    - <canvas#bg-field>      full-screen theme animation surface
+    - .scanlines / .grain    CRT-style overlays (decorative chrome)
+    - #boot                  faux terminal boot sequence (fades out)
+    - #stage                 the real hero: HUD, crest, title, rotor, CTAs
+    - .side-selectors        EN/ES language + 7-theme palette switcher
+
+  Script load order matters (plain <script> tags, no modules):
+    1. js/content.js   defines window.DSS + DSS.THEMES + i18n/crest data
+    2. js/themes/*.js  each registers its {seed,draw} on DSS.THEMES
+    3. js/shared.js    boots the stage, owns the canvas loop + selectors
+
+  Theme palettes are all <link>ed up top so switching is instant. Each
+  only sets CSS vars for its [data-theme]; shared.js flips the attribute.
+  ============================================================
+-->
 <html lang="en">
 <head>
 <meta charset="UTF-8" />

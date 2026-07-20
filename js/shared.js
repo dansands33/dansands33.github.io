@@ -1,8 +1,20 @@
 /* ============================================================
-   DAN SANDS // signal — shared runtime
-   Boots the stage, owns the canvas/loop + shared state (window.DSS),
-   and wires i18n, theme + language selectors, contact modal, and sparks.
-   Theme animations live in js/themes/*.js (register on DSS.THEMES).
+   DAN SANDS // signal — shared.js (the runtime)
+   ------------------------------------------------------------
+   Boots the stage and owns everything shared:
+     - window.DSS            the single global state bag
+         DSS.canvas/DSS.ctx  the one <canvas#bg-field> 2D context
+         DSS.W/DSS.H         viewport size (resized on load + resize)
+         DSS.mx/DSS.my       normalized mouse parallax (-0.3..0.3)
+         DSS.THEMES          registry filled by js/themes/*.js BEFORE this runs
+     - the rAF loop          calls DSS.THEMES[mode].draw() + click sparks
+     - i18n                  data-i18n fill + rotor (typed/erased subline)
+     - selectors             EN/ES language + 7-theme palette (persisted)
+     - contact modal         obfuscated email (reveal+click-to-copy), LinkedIn, GitHub
+     - boot sequence         faux terminal, fades into #stage
+     - title glitch          scramble-on-hover
+   Loaded LAST so DSS.THEMES is already populated. Exploration-grade
+   code: one canvas, one loop, themes just swap the paint.
    ============================================================ */
 (function () {
   "use strict";

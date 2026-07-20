@@ -1,4 +1,11 @@
-/* THEME: starfield (Ad Astra) — deep space · white stars · rocket-exhaust orange */
+/* ============================================================
+   THEME: starfield (Ad Astra) — deep space · white stars · rocket-exhaust orange
+   ------------------------------------------------------------
+   Palette + hero-crest overrides for the "ad astra" mood. Sets
+   [data-theme="starfield"] vars consumed by base.css and by
+   js/themes/starfield.js (parallax stars, rockets, shooting stars).
+   Crest = cool blue shimmer. One of seven.
+   ============================================================ */
 [data-theme="starfield"]{
   --bg:#050a16; --bg-2:#0a1224; --ink:#eaf0fb; --ink-dim:#7f8db0;
   --hot:#ff8a3d; --hot-2:#ffc24d; --cool:#6fa8ff; --cool-2:#9c7bff;
@@ -12,4 +19,27 @@
   filter:drop-shadow(0 0 10px rgba(var(--rgb-cool),.25));
   background:linear-gradient(115deg,var(--cool) 20%,#fff 42%,var(--cool) 60%);
   background-size:250% 100%;-webkit-background-clip:text;background-clip:text;
+}
+
+/* Ad Astra — deep-space field: near-black core, blue/purple border glow, deep-blue ring.
+   Overrides the base body background so the screen center reads as true space while the
+   edges keep the beloved blue/purple hues (+ a faint rocket-exhaust orange).
+   The dark core is built from STACKED concentric ellipses (each fading to transparent at a
+   different radius) so the center-to-edge darkening is continuous and the single-ellipse
+   boundary is no longer noticeable. */
+[data-theme="starfield"] body{
+  background:
+    /* outermost: full black, fades out only at the very edge → seamless vignette */
+    radial-gradient(82% 70% at 50% 50%, #000003 0%, #000003 48%, transparent 100%),
+    /* mid: adds black between the core and edge, transparent in the center */
+    radial-gradient(74% 64% at 50% 50%, transparent 36%, #000003 52%, transparent 100%),
+    /* inner: tightens the deepest black to the dead center, transparent middle */
+    radial-gradient(64% 56% at 50% 50%, transparent 22%, #000003 42%, transparent 100%),
+    /* blue / purple / orange border glows (kept from the original look) */
+    radial-gradient(1150px 850px at 12% 112%, rgba(111,168,255,0.22), transparent 60%),
+    radial-gradient(1050px 780px at 90% -10%, rgba(156,123,255,0.20), transparent 62%),
+    radial-gradient(900px 680px at 94% 106%, rgba(255,138,61,0.10), transparent 60%),
+    /* deep-blue atmospheric ring at the very edges */
+    radial-gradient(150% 130% at 50% 50%, transparent 28%, rgba(8,15,34,0.55) 78%, rgba(5,9,20,0.90) 100%),
+    #050a16;
 }

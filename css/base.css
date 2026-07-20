@@ -1,6 +1,17 @@
 /* ============================================================
-   DAN SANDS // signal — base styles (theme-independent)
-   Theme palettes live in css/themes/*.css
+   DAN SANDS // signal — base.css (theme-independent layout)
+   ------------------------------------------------------------
+   The shared skeleton: fonts, reset, the full-screen canvas,
+   CRT chrome (.scanlines/.grain), boot sequence, HUD frame,
+   hero, CTAs, WIP line, footer, contact modal, and the
+   EN/ES + palette selectors. ALL colors are CSS custom
+   properties defined here (defaults = sunset) and overridden
+   per-theme in css/themes/*.css via [data-theme].
+
+   This file is the "non-negotiable" chrome. Themes only swap
+   the palette + the canvas animation behind it. (Exploration
+   note: I couldn't let a personal site be one <div>, so this
+   is the frame the seven moods hang off of.)
    ============================================================ */
 
 :root{

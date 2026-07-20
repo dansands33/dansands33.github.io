@@ -1,4 +1,12 @@
-/* THEME: dawn (light) — warm cream · roasted coffee · soft rose · sky */
+/* ============================================================
+   THEME: dawn (light) — warm cream · roasted coffee · soft rose · sky
+   ------------------------------------------------------------
+   LIGHT theme. Palette + hero-crest + surface overrides for the
+   "calm morning" mood. Because the base dark-glass surfaces assume
+   a dark bg, this file re-skins the title gradient, swatch tooltip,
+   contact modal, footer, and primary CTA so they stay legible on a
+   pale ground. Crest = coffee→rose shimmer. One of seven.
+   ============================================================ */
 [data-theme="dawn"]{
   --bg:#fbf3ea; --bg-2:#f3e7da; --ink:#3a2a22; --ink-dim:#6f5a4a;
   --hot:#b15426; --hot-2:#d27a44; --cool:#a85076; --cool-2:#7d9fd6;

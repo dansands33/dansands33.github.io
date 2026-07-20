@@ -1,4 +1,11 @@
-/* THEME: sahira — white · warm brown · copper (light theme) */
+/* ============================================================
+   THEME: sahira — white · warm brown · copper (light theme)
+   ------------------------------------------------------------
+   LIGHT theme. Palette + hero-crest + surface overrides for the
+   "persian warmth" mood. Like dawn, it re-skins title/tooltip/modal/
+   footer/CTA for a pale background (the base dark glass would vanish
+   on white). Crest = copper→cream shimmer. One of seven.
+   ============================================================ */
 [data-theme="sahira"]{
   --bg:#fbf6ef; --bg-2:#f3ebe0; --ink:#3d2b21; --ink-dim:#6f5a4a;
   --hot:#a85f2a; --hot-2:#c47a3a; --cool:#8a5e34; --cool-2:#7a4d2c;

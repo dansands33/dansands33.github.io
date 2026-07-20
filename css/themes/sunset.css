@@ -1,4 +1,12 @@
-/* THEME: sunset (default) — techy orange ⇄ cyan */
+/* ============================================================
+   THEME: sunset (default) — techy orange ⇄ cyan
+   ------------------------------------------------------------
+   The default palette + the hero-crest gradient override. Sets
+   [data-theme="sunset"] vars (used by base.css + the constellation
+   animation in js/themes/sunset.js). The crest uses an orange→
+   purple background-clip gradient with a breathing glow. This is
+   the baseline mood; the other six are riffs off the same frame.
+   ============================================================ */
 [data-theme="sunset"]{
   --bg:#05070d; --bg-2:#0a0e18; --ink:#e8ecf4; --ink-dim:#8892a6;
   --hot:#ff5c3a; --hot-2:#ff8a3d; --cool:#38e1ff; --cool-2:#6c7bff;

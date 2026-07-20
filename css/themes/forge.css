@@ -1,4 +1,12 @@
-/* THEME: forge — fire: rich orange · deep red · bright yellow */
+/* ============================================================
+   THEME: forge — fire: rich orange · deep red · bright yellow
+   ------------------------------------------------------------
+   Palette + hero-crest overrides for the "blacksmith's hearth"
+   mood. Sets [data-theme="forge"] vars consumed by base.css and
+   by js/themes/forge.js (the ember fountain reads --rgb-hot /
+   --rgb-gold). Warm crest glow, no light-theme surface fixes
+   needed (forge stays dark). One of seven.
+   ============================================================ */
 [data-theme="forge"]{
   --bg:#0c0503; --bg-2:#1a0805; --ink:#ffeede; --ink-dim:#c08a6a;
   --hot:#ff6a1f; --hot-2:#ffd23f; --cool:#ff3b1f; --cool-2:#ff9500;

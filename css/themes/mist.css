@@ -1,4 +1,11 @@
-/* THEME: mist (Misty Forest) — forest greens · light blue · wood · white mist */
+/* ============================================================
+   THEME: mist (Misty Forest) — forest greens · light blue · wood · white mist
+   ------------------------------------------------------------
+   Palette + hero-crest overrides for the "misty forest" mood. Sets
+   [data-theme="mist"] vars (note the extra --mist-white / --mist-wood
+   tokens used by js/themes/mist.js for the fog palette). Dark theme,
+   so no surface re-skins needed. One of seven.
+   ============================================================ */
 [data-theme="mist"]{
   --bg:#0c130d; --bg-2:#131d15; --ink:#eef4ee; --ink-dim:#8fa896;
   --hot:#4fae6d; --hot-2:#7fd89a; --cool:#8fd0e6; --cool-2:#3f7a58;

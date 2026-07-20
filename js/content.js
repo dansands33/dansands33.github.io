@@ -1,7 +1,17 @@
 /* ============================================================
-   DAN SANDS // signal — Content module
-   Localized strings + theme-specific copy (e.g. the aurelius "rain" lines).
-   Exposed on window.DSS.content for the shared runtime + theme animations.
+   DAN SANDS // signal — content.js (data module)
+   ------------------------------------------------------------
+   Defines window.DSS + DSS.THEMES (primed empty; js/themes/*.js
+   fill it) and exposes window.DSS.content for the runtime:
+     - I18N            EN/ES hero copy + rotating #rotor phrases
+     - RAIN_LINES(_ES) aurelius "chapters" text (drifts down in canvas)
+     - CRESTS          inline ASCII hero crests (per-theme) — instant
+                       fallback; overridden by css/themes/<name>.txt once
+                       those fetch (see CRESTS_READY below)
+     - EMAIL_PARTS     email split to dodge scrapers (joined at runtime)
+     - LINKS           LinkedIn / GitHub URLs
+   Also kicks off the async fetch of the generated crest .txt files.
+   This is content only — no DOM, no canvas. (Exploration phase 01.)
    ============================================================ */
 (function () {
   "use strict";
