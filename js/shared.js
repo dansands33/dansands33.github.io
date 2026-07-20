@@ -30,9 +30,10 @@
   DSS.W = 0; DSS.H = 0; DSS.mx = 0; DSS.my = 0;
   DSS.lang = "en";
   DSS.rgb = (v, f) => (getComputedStyle(document.documentElement).getPropertyValue(v).trim() || f);
+  const DEFAULT_THEME = "aurelius";   // opening theme for first-time visitors
 
   const content = DSS.content;
-  let mode = "sunset";
+  let mode = DEFAULT_THEME;
   function resize() { DSS.W = canvas.width = innerWidth; DSS.H = canvas.height = innerHeight; }
 
   function reseed() { (DSS.THEMES[mode] || { seed(){} }).seed(); if (mode === "aurelius") ctx.clearRect(0, 0, DSS.W, DSS.H); }
@@ -254,7 +255,7 @@
   /* ---------- go ---------- */
   let savedLang = "en"; try { savedLang = localStorage.getItem("dss-lang") || "en"; } catch (_) {}
   applyLang(savedLang);
-  let savedTheme = "sunset"; try { savedTheme = localStorage.getItem("dss-theme") || "sunset"; } catch (_) {}
+  let savedTheme = DEFAULT_THEME; try { savedTheme = localStorage.getItem("dss-theme") || DEFAULT_THEME; } catch (_) {}
   applyTheme(savedTheme);   // also seeds the canvas for the saved theme
   runBoot();
   startField();
