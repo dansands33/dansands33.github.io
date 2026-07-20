@@ -96,13 +96,33 @@ swatch. Same canvas, same loop — only the paint changes.
 | **sahira** | white · brown · copper *(light)* | Soft watercolor blooms in copper/amber/brown | persian warmth |
 | **mist** | forest green · light blue · wood *(dark)* | Top-down ASCII forest + a gentle procedural river + drifting fog | misty forest |
 | **starfield** *(Ad Astra)* | deep space · white stars · rocket orange | Parallax stars + constellation lines + launching rockets + shooting stars | ad astra |
-| **aurelius** | black · gold · silver | Slow "chapters being written" — sentences drift down like rain; a unique black+gold bust crest | classical, editorial |
+| **aurelius** | black · gold · silver | "Chapters being written" — gold sentences **rain in staggered** (random per-column spawn) like slow rain; a unique black+gold bust crest | classical, editorial |
 
 Light themes (`dawn`, `sahira`) carry extra surface overrides in their CSS so the
 modal, swatch tooltips, title gradient, and footer stay legible on a pale ground.
 
 All motion respects `prefers-reduced-motion`: the canvas, grain, and scanlines
 drop out and the boot sequence short-circuits straight to the stage.
+
+### aurelius — the "chapter" lifecycle
+
+Aurelius is the most choreographed theme. Instead of a constant particle field it
+tells the page in **chapters**:
+
+1. **IN** — a *shared* opacity envelope eases `0 → 1`. Sentences don't all appear
+   at once: each column starts as a *pending* slot with a random `activateAt`
+   spread across the chapter's visible window, so sentences **rain in staggered**
+   from the top rather than popping in together.
+2. **DROP** — full opacity; columns fall and **keep falling**, recycling to the
+   top once they exit the bottom — the motion never stops.
+3. **HOLD** — the fall continues for ~5s at full opacity.
+4. **OUT** — the shared envelope eases `1 → 0` while still falling, then a fresh
+   chapter begins with new lines.
+
+**Pointer modulation:** while the mouse moves the fall **slows**; idle for >1s the
+speed ramps back to default. **Spawn safety:** a recycled column only re-spawns
+when the chapter still has enough full-opacity time left to scroll in and be read
+— so nothing fades out before it enters the viewport.
 
 ---
 
