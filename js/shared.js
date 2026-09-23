@@ -11,7 +11,7 @@
      - i18n                  data-i18n fill + rotor (typed/erased subline)
      - selectors             EN/ES language + 7-theme palette (persisted)
      - contact modal         obfuscated email (reveal+click-to-copy), LinkedIn, GitHub
-     - boot sequence         faux terminal, fades into #stage
+     - home boot sequence    faux terminal, shown once per tab session
      - title glitch          scramble-on-hover
    Loaded LAST so DSS.THEMES is already populated. Exploration-grade
    code: one canvas, one loop, themes just swap the paint.
@@ -71,6 +71,7 @@
   let rotorTimer = null;   // latest timeout handle; clear it when restarting the rotor
   let rotorGen = 0;        // invalidates callbacks from an earlier language cycle
   function typeLoop() {
+    if (!rotor) return;
     if (reduce) { rotor.textContent = phrases[phrases.length - 1]; return; }
     const gen = ++rotorGen;
     const alive = () => gen === rotorGen;
@@ -99,6 +100,7 @@
     typePhrase();
   }
   function restartRotor() {
+    if (!rotor) return;
     rotorGen++; // invalidate callbacks from the previous language
     if (rotorTimer) clearTimeout(rotorTimer);
     rotor.textContent = "";
@@ -112,7 +114,8 @@
     el.textContent = new Date().toISOString().slice(11, 19) + " UTC";
   }
   setInterval(tickClock, 1000); tickClock();
-  document.getElementById("year").textContent = new Date().getFullYear();
+  const year = document.getElementById("year");
+  if (year) year.textContent = new Date().getFullYear();
 
   /* ---------- boot sequence ---------- */
   const bootEl = document.getElementById("boot");
@@ -120,6 +123,21 @@
   const bootError = document.getElementById("boot-error");
   const bootRetry = document.getElementById("boot-retry");
   const stage = document.getElementById("stage");
+  const LANDING_SESSION_KEY = "dss-landing-opened-at";
+  const LANDING_SESSION_MS = 10 * 60 * 1000;
+  function shouldShowLandingBoot() {
+    if (document.body.dataset.page !== "home") return false;
+    const now = Date.now();
+    try {
+      const openedAt = Number(sessionStorage.getItem(LANDING_SESSION_KEY));
+      const sessionIsFresh = Number.isFinite(openedAt) && openedAt <= now && now - openedAt < LANDING_SESSION_MS;
+      sessionStorage.setItem(LANDING_SESSION_KEY, String(now));
+      return !sessionIsFresh;
+    } catch (_) {
+      // If tab storage is unavailable, keep the first-visit experience predictable.
+      return true;
+    }
+  }
   const bootLines = [
     "> initializing signal…",
     "> loading identity :: DAN.SANDS",
@@ -129,6 +147,8 @@
     "> decrypting mission ......... <span class='ok'>done</span>",
     "> <span class='warn'>welcome, operator.</span>",
   ];
+  const longestBootLine = Math.max(...bootLines.map((line) => line.replace(/<[^>]*>/g, "").length));
+  bootText.style.width = `${longestBootLine}ch`;
   function runBoot() {
     bootError.classList.add("hidden");
     bootText.classList.remove("hidden");
@@ -136,6 +156,7 @@
     bootEl.classList.remove("boot-error-active");
     bootEl.style.opacity = "1";
     bootEl.style.transition = "";
+    bootEl.classList.remove("hidden");
     if (reduce) { bootEl.classList.add("hidden"); stage.classList.remove("hidden"); return; }
     let i = 0, buf = "";
     (function next() {
@@ -219,10 +240,13 @@
     });
     return modal;
   }
-  const modal = buildModal();
-  document.getElementById("contact-btn").addEventListener("click", (e) => {
-    e.preventDefault(); modal.classList.add("open");
-  });
+  const contactButton = document.getElementById("contact-btn");
+  if (contactButton) {
+    const modal = buildModal();
+    contactButton.addEventListener("click", (e) => {
+      e.preventDefault(); modal.classList.add("open");
+    });
+  }
 
   /* ---------- palette selector (persisted, order from HTML) ---------- */
   const swatches = document.querySelectorAll(".swatch");
@@ -232,7 +256,7 @@
   }
   function applyTheme(name) {
     const known = [...swatches].map((s) => s.dataset.set);
-    if (!known.includes(name)) name = DEFAULT_THEME;
+    if (known.length ? !known.includes(name) : !DSS.THEMES[name]) name = DEFAULT_THEME;
     document.documentElement.setAttribute("data-theme", name);
     swatches.forEach((s) => s.setAttribute("aria-pressed", String(s.dataset.set === name)));
     setCrest(name);
@@ -244,7 +268,12 @@
   DSS.content.CRESTS_READY
     .then(() => {
       setCrest(document.documentElement.getAttribute("data-theme"));
-      runBoot();
+      if (shouldShowLandingBoot()) {
+        runBoot();
+      } else {
+        bootEl.classList.add("hidden");
+        stage.classList.remove("hidden");
+      }
       startField();
     })
     .catch(showBootError);

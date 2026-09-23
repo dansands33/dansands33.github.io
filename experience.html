@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- DAN SANDS // signal — lightweight experience placeholder -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DAN SANDS — experience</title>
+<meta name="description" content="The Dan Sands experience page is coming soon." />
+<meta name="robots" content="index, follow" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;700&family=Cinzel:wght@500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/experience.css" />
+<link rel="stylesheet" href="css/themes/sunset.css" />
+<link rel="stylesheet" href="css/themes/forge.css" />
+<link rel="stylesheet" href="css/themes/dawn.css" />
+<link rel="stylesheet" href="css/themes/sahira.css" />
+<link rel="stylesheet" href="css/themes/mist.css" />
+<link rel="stylesheet" href="css/themes/starfield.css" />
+<link rel="stylesheet" href="css/themes/aurelius.css" />
+</head>
+<body data-page="experience">
+<canvas id="bg-field" aria-hidden="true"></canvas>
+<div id="scanlines" class="scanlines" aria-hidden="true"></div>
+<div id="grain" class="grain" aria-hidden="true"></div>
+
+<!-- Kept for a clear themed asset-load error; the regular boot animation is home-only. -->
+<div id="boot" class="hidden" aria-hidden="true">
+  <section id="boot-panel" aria-live="polite">
+    <pre id="boot-text"></pre>
+    <div id="boot-error" class="hidden" role="alert">
+      <p id="boot-error-title">THE SIGNAL COULD NOT INITIALIZE</p>
+      <p id="boot-error-detail">Required theme artwork is unavailable.</p>
+      <p id="boot-error-help">Serve this folder over HTTP, then reload the page.</p>
+      <button id="boot-retry" type="button">retry initialization</button>
+    </div>
+  </section>
+</div>
+
+<header id="site-header" class="site-header">
+  <div id="site-header-content" class="site-header-content">
+    <div id="site-system" class="site-header-system">
+      <span id="hud-top-left-tick" class="hud-tick" aria-hidden="true">◢</span>
+      <span id="hud-system-label">SYS // DAN.SANDS</span>
+    </div>
+    <nav id="primary-navigation" class="primary-navigation" aria-label="Primary">
+      <a id="nav-home" href="index.html">Home</a>
+      <a id="nav-experience" href="experience.html" aria-current="page">Experience</a>
+    </nav>
+    <div id="site-status" class="site-header-status">
+      <span id="hud-status-label">STATUS: <b id="hud-status" class="pulse">ONLINE</b></span>
+      <span id="hud-top-right-tick" class="hud-tick" aria-hidden="true">◣</span>
+    </div>
+  </div>
+</header>
+
+<main id="stage" class="experience-stage">
+  <section id="experience-terminal" class="experience-terminal" aria-labelledby="experience-title">
+    <p id="terminal-path" class="terminal-path">&gt; dan-sands / experience</p>
+    <h1 id="experience-title">Experience</h1>
+    <h2 id="coming-soon-heading">Coming soon</h2>
+    <p id="experience-description" class="terminal-copy">Career history and selected work are being prepared.</p>
+    <p id="experience-status" class="terminal-status">&gt; status: in progress</p>
+    <a id="return-home" class="terminal-link" href="index.html">&gt; return to home</a>
+  </section>
+</main>
+
+<script src="js/content.js"></script>
+<script src="js/themes/sunset.js"></script>
+<script src="js/themes/forge.js"></script>
+<script src="js/themes/dawn.js"></script>
+<script src="js/themes/sahira.js"></script>
+<script src="js/themes/mist.js"></script>
+<script src="js/themes/starfield.js"></script>
+<script src="js/themes/aurelius.js"></script>
+<script src="js/shared.js"></script>
+</body>
+</html>
