@@ -147,6 +147,8 @@
     "> decrypting mission ......... <span class='ok'>done</span>",
     "> <span class='warn'>welcome, operator.</span>",
   ];
+  const longestBootLine = Math.max(...bootLines.map((line) => line.replace(/<[^>]*>/g, "").length));
+  bootText.style.width = `${longestBootLine}ch`;
   function runBoot() {
     bootError.classList.add("hidden");
     bootText.classList.remove("hidden");
