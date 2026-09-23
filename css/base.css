@@ -79,15 +79,36 @@ body{
 /* ---------- boot sequence ---------- */
 #boot{
   position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;
-  background:var(--bg);
+  background:var(--bg);overflow:hidden;
 }
+#boot.boot-error-active{background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(1px)}
+#boot-panel{position:relative;z-index:2;width:min(680px,88vw)}
 #boot-text{
   font-family:var(--mono);font-size:clamp(.7rem,1.6vw,.95rem);
   color:var(--cool);line-height:1.55;white-space:pre-wrap;
-  max-width:min(680px,88vw);text-shadow:0 0 12px rgba(56,225,255,.4);
+  margin:0;text-shadow:0 0 12px rgba(56,225,255,.4);
 }
 #boot-text .ok{color:var(--gold)}
 #boot-text .warn{color:var(--hot)}
+#boot-error{
+  position:relative;margin-top:1rem;padding:1.25rem 1.4rem 1.35rem;
+  border:1px solid var(--glass-brd);border-left:2px solid var(--hot);border-radius:8px;
+  background:linear-gradient(145deg,rgba(20,28,44,.84),rgba(5,7,13,.92));
+  box-shadow:0 18px 70px rgba(0,0,0,.48),0 0 32px rgba(var(--rgb-hot),.08),inset 0 1px rgba(255,255,255,.04);
+  color:var(--ink);font-family:var(--mono);animation:boot-error-in .35s ease-out both;
+}
+#boot-error::before{content:"SIGNAL // INITIALIZATION FAULT";display:block;margin-bottom:.8rem;color:var(--hot);font-size:.62rem;letter-spacing:.18em}
+#boot-error p{margin:.45rem 0;color:var(--ink-dim);font-size:clamp(.68rem,1.4vw,.82rem);line-height:1.6}
+#boot-error #boot-error-title{color:var(--ink);font-size:clamp(.78rem,1.8vw,1rem);letter-spacing:.08em}
+#boot-error #boot-error-help{color:var(--cool)}
+#boot-retry{
+  margin-top:.65rem;padding:.7rem .9rem;border:1px solid var(--glass-brd);border-radius:5px;
+  background:rgba(255,255,255,.035);color:var(--gold);font:500 .7rem var(--mono);
+  letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s,border-color .2s;
+}
+#boot-retry:hover,#boot-retry:focus-visible{background:rgba(var(--rgb-hot),.1);border-color:var(--hot);outline:none}
+@keyframes boot-error-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){#boot-error{animation:none}#boot-retry{transition:none}}
 
 /* ---------- stage / HUD ---------- */
 #stage{position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column}

@@ -30,7 +30,8 @@
   DSS.W = 0; DSS.H = 0; DSS.mx = 0; DSS.my = 0;
   DSS.lang = "en";
   DSS.rgb = (v, f) => (getComputedStyle(document.documentElement).getPropertyValue(v).trim() || f);
-  const DEFAULT_THEME = "aurelius";   // opening theme for first-time visitors
+  // Used when storage is empty or unavailable; applyTheme validates saved values.
+  const DEFAULT_THEME = "aurelius";
 
   const content = DSS.content;
   let mode = DEFAULT_THEME;
@@ -67,12 +68,12 @@
 
   /* ---------- rotating subline ---------- */
   const rotor = document.getElementById("rotor");
-  let rotorTimer = null;   // most recently scheduled timeout (immediate cleanup hook)
-  let rotorGen = 0;        // generation token — invalidates stale loops after a lang switch
+  let rotorTimer = null;   // latest timeout handle; clear it when restarting the rotor
+  let rotorGen = 0;        // invalidates callbacks from an earlier language cycle
   function typeLoop() {
     if (reduce) { rotor.textContent = phrases[phrases.length - 1]; return; }
-    const gen = ++rotorGen;                  // this run's generation
-    const alive = () => gen === rotorGen;    // true only while this loop is the current one
+    const gen = ++rotorGen;
+    const alive = () => gen === rotorGen;
     let pi = 0;
     const show = (t) => { if (alive()) rotor.textContent = t; };
     function typePhrase() {
@@ -98,7 +99,7 @@
     typePhrase();
   }
   function restartRotor() {
-    rotorGen++;                              // invalidate any in-flight loop from the old language
+    rotorGen++; // invalidate callbacks from the previous language
     if (rotorTimer) clearTimeout(rotorTimer);
     rotor.textContent = "";
     typeLoop();
@@ -116,6 +117,8 @@
   /* ---------- boot sequence ---------- */
   const bootEl = document.getElementById("boot");
   const bootText = document.getElementById("boot-text");
+  const bootError = document.getElementById("boot-error");
+  const bootRetry = document.getElementById("boot-retry");
   const stage = document.getElementById("stage");
   const bootLines = [
     "> initializing signal…",
@@ -127,6 +130,12 @@
     "> <span class='warn'>welcome, operator.</span>",
   ];
   function runBoot() {
+    bootError.classList.add("hidden");
+    bootText.classList.remove("hidden");
+    bootEl.setAttribute("aria-hidden", "true");
+    bootEl.classList.remove("boot-error-active");
+    bootEl.style.opacity = "1";
+    bootEl.style.transition = "";
     if (reduce) { bootEl.classList.add("hidden"); stage.classList.remove("hidden"); return; }
     let i = 0, buf = "";
     (function next() {
@@ -144,6 +153,19 @@
       setTimeout(next, 260 + Math.random() * 180);
     })();
   }
+
+  function showBootError(error) {
+    console.error("Theme artwork could not be loaded:", error);
+    bootText.classList.add("hidden");
+    bootError.classList.remove("hidden");
+    bootEl.setAttribute("aria-hidden", "false");
+    bootEl.classList.add("boot-error-active");
+    bootEl.classList.remove("hidden");
+    bootEl.style.opacity = "1";
+    stage.classList.add("hidden");
+    startField();
+  }
+  bootRetry.addEventListener("click", () => window.location.reload());
 
   /* ---------- title glitch on hover ---------- */
   const titleLine = document.querySelector(".title .line");
@@ -210,7 +232,7 @@
   }
   function applyTheme(name) {
     const known = [...swatches].map((s) => s.dataset.set);
-    if (!known.includes(name)) name = "sunset";
+    if (!known.includes(name)) name = DEFAULT_THEME;
     document.documentElement.setAttribute("data-theme", name);
     swatches.forEach((s) => s.setAttribute("aria-pressed", String(s.dataset.set === name)));
     setCrest(name);
@@ -218,8 +240,14 @@
     try { localStorage.setItem("dss-theme", name); } catch (_) {}
   }
   swatches.forEach((s) => s.addEventListener("click", () => applyTheme(s.dataset.set)));
-  // once the .txt crests finish loading, re-render the current theme from file
-  if (DSS.content.CRESTS_READY) DSS.content.CRESTS_READY.then(() => setCrest(document.documentElement.getAttribute("data-theme")));
+  // Do not reveal the page until all theme art has loaded successfully.
+  DSS.content.CRESTS_READY
+    .then(() => {
+      setCrest(document.documentElement.getAttribute("data-theme"));
+      runBoot();
+      startField();
+    })
+    .catch(showBootError);
 
   /* ---------- language selector (persisted, default EN) ---------- */
   const langBtns = document.querySelectorAll(".lang-btn");
@@ -257,8 +285,5 @@
   applyLang(savedLang);
   let savedTheme = DEFAULT_THEME; try { savedTheme = localStorage.getItem("dss-theme") || DEFAULT_THEME; } catch (_) {}
   applyTheme(savedTheme);   // also seeds the canvas for the saved theme
-  runBoot();
-  startField();
-  // NOTE: the rotor is started by applyLang()→restartRotor() above, so do NOT start a
-  // second loop here — doing so made two competing loops write to #rotor at once.
+  // applyLang() starts the rotor; starting it again here would create a second writer.
 })();

@@ -5,9 +5,7 @@
    fill it) and exposes window.DSS.content for the runtime:
      - I18N            EN/ES hero copy + rotating #rotor phrases
      - RAIN_LINES(_ES) aurelius "chapters" text (drifts down in canvas)
-     - CRESTS          inline ASCII hero crests (per-theme) — instant
-                       fallback; overridden by css/themes/<name>.txt once
-                       those fetch (see CRESTS_READY below)
+     - CRESTS          ASCII art loaded from css/themes/<name>.txt
      - EMAIL_PARTS     email split to dodge scrapers (joined at runtime)
      - LINKS           LinkedIn / GitHub URLs
    Also kicks off the async fetch of the generated crest .txt files.
@@ -95,111 +93,10 @@
     github:   "https://github.com/dansands33",
   };
 
-  // ---------- per-theme hero crests (a unique ASCII icon per theme) ----------
-  const CRESTS = {
-    // aurelius — Greek head / classical bust
-    aurelius: [
-      "      .-\"\"\"\"-.",
-      "     /  .--.  \\",
-      "    |  | () |  |",
-      "    |   \\__/   |",
-      "     \\        /",
-      "    __\\'    '/__",
-      "   /  _      _  \\",
-      "  |  (_)    (_)  |",
-      "   \\   '----'   /",
-      "    '----------'",
-    ],
-    // starfield (Ad Astra) — astronaut helmet
-    starfield: [
-      "       .------.",
-      "      /  .--.  \\",
-      "     |  /    \\  |",
-      "     | |  /\\  | |",
-      "     | | (  ) | |",
-      "     |  \\    /  |",
-      "      \\  '--'  /",
-      "       '------'",
-      "        |    |",
-    ],
-    // forge — shield with crossed swords
-    forge: [
-      "        \\     /",
-      "         \\   /",
-      "       ---(+)",
-      "         /   \\",
-      "        /     \\",
-      "       /_____\\",
-      "      |         |",
-      "      |  .---.  |",
-      "      | (     ) |",
-      "      |  '---'  |",
-      "       \\_______/",
-    ],
-    // mist (Misty Forest) — a stand of pines
-    mist: [
-      "        /\\      /\\",
-      "       /  \\    /  \\",
-      "      /    \\  /    \\",
-      "     /  /\\  \\/  /\\  \\",
-      "    /  /  \\    /  \\  \\",
-      "   /__/    \\  /    \\__\\",
-      "  |  |      \\/      |  |",
-      "  \\__/                \\__/",
-      "     |        |        |",
-      "     |        |        |",
-    ],
-    // sunset — cyberpunk sun on the horizon
-    sunset: [
-      "        .   .   .",
-      "      _ ___________ _",
-      "     / \\___________/ \\",
-      "    |  .  .   .  .  |",
-      "    | .   .   .   . |",
-      "     \\__ _ _ _ _ __/",
-      "    ~~~~~  ~~~~  ~~~~",
-      "   --  --  --  --  --",
-    ],
-    // dawn — cup of coffee with steam
-    dawn: [
-      "         )  (  )",
-      "        (    )",
-      "       .-\"\"\"\"\"\"-.",
-      "      /  ______  \\",
-      "     |  /      \\  |",
-      "     | |  ~~~~  | |",
-      "     |  \\______/  |",
-      "      \\________/",
-      "       |      |",
-      "       |______|",
-    ],
-    // sahira — persian cat (white · brown · copper)
-    sahira: [
-      "                /\\        /\\",
-      "               /  \\      /  \\",
-      "              /    \\    /    \\",
-      "             |      \\  /      |",
-      "             |       \\/       |",
-      "              \\      ||      /",
-      "               \\  _  ||  _  /",
-      "                \\/ \\ || / \\/",
-      "               /     ||     \\",
-      "              |  .------.   |",
-      "              | /  /\\   \\   |",
-      "              | \\ (  )  /   |",
-      "               \\  \\____/    /",
-      "                \\   ||    /",
-      "                 \\  ||   /",
-      "                  \\ ||  /",
-      "                   \\|| /",
-      "                    \\/",
-      "        /\\          /    \\          /\\",
-      "       /  \\        /      \\        /  \\",
-      "      | () |      |        |      | () |",
-      "       \\__/        \\      /        \\__/",
-      "                    \\____/",
-    ],
-  };
+  // ---------- per-theme hero crests (loaded from CSS-adjacent text files) ----------
+  const CREST_FILES = ["aurelius", "starfield", "forge", "mist", "sunset", "dawn", "sahira"];
+  const CRESTS = Object.create(null);
+
 
   window.DSS.content = {
     I18N,
@@ -212,16 +109,21 @@
   };
 
   // ---------- load per-theme ASCII crests from css/themes/<name>.txt ----------
-  // Inline CRESTS above is the synchronous fallback (renders instantly); once the
-  // .txt files load we override each entry with the file's exact contents.
+  // The text files are authoritative. Reject missing/empty files instead of
+  // showing stale inline art or silently hiding deployment problems.
   const content = window.DSS.content;
-  const CREST_FILES = ["aurelius","starfield","forge","mist","sunset","dawn","sahira"];
   const CRESTS_READY = Promise.all(
     CREST_FILES.map((name) =>
       fetch(`css/themes/${name}.txt`)
-        .then((r) => (r.ok ? r.text() : Promise.reject()))
-        .then((txt) => { content.CRESTS[name] = txt.replace(/\r\n/g, "\n").replace(/\n+$/,"").split("\n"); })
-        .catch(() => { /* keep inline fallback for this theme */ })
+        .then((response) => {
+          if (!response.ok) throw new Error(`Could not load ${name} crest (${response.status})`);
+          return response.text();
+        })
+        .then((text) => {
+          const normalized = text.replace(/\r\n/g, "\n").replace(/\n+$/, "");
+          if (!normalized) throw new Error(`Crest file for ${name} is empty`);
+          content.CRESTS[name] = normalized.split("\n");
+        })
     )
   );
   window.DSS.content.CRESTS_READY = CRESTS_READY;

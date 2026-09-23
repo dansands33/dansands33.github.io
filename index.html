@@ -4,16 +4,15 @@
   ============================================================
   The entire page. No framework, no build step — just markup.
 
-  This is EXPLORATION, not a finished product. (I have a design
-  background, so a plain single-page site was never going to be
-  enough — I had to push the hero into a small mood playground.)
+  This is EXPLORATION, not a finished product. The page is a focused
+  single-screen introduction and visual playground.
 
   Structure:
     - <canvas#bg-field>      full-screen theme animation surface
-    - .scanlines / .grain    CRT-style overlays (decorative chrome)
+    - #scanlines / #grain    CRT-style overlays (decorative chrome)
     - #boot                  faux terminal boot sequence (fades out)
     - #stage                 the real hero: HUD, crest, title, rotor, CTAs
-    - .side-selectors        EN/ES language + 7-theme palette switcher
+    - #side-selectors        EN/ES language + 7-theme palette switcher
 
   Script load order matters (plain <script> tags, no modules):
     1. js/content.js   defines window.DSS + DSS.THEMES + i18n/crest data
@@ -55,106 +54,103 @@
 </head>
 <body>
 <canvas id="bg-field" aria-hidden="true"></canvas>
-<div class="scanlines" aria-hidden="true"></div>
-<div class="grain" aria-hidden="true"></div>
+<div id="scanlines" class="scanlines" aria-hidden="true"></div>
+<div id="grain" class="grain" aria-hidden="true"></div>
 
 <!-- boot sequence -->
 <div id="boot" aria-hidden="true">
-  <pre id="boot-text"></pre>
+  <section id="boot-panel" aria-live="polite">
+    <pre id="boot-text"></pre>
+    <div id="boot-error" class="hidden" role="alert">
+      <p id="boot-error-title">THE SIGNAL COULD NOT INITIALIZE</p>
+      <p id="boot-error-detail">Required theme artwork is unavailable.</p>
+      <p id="boot-error-help">Serve this folder over HTTP, then reload the page.</p>
+      <button id="boot-retry" type="button">retry initialization</button>
+    </div>
+  </section>
 </div>
 
 <main id="stage" class="hidden">
   <!-- HUD corners -->
-  <div class="hud hud-tl" aria-hidden="true">
-    <span class="hud-tick">◢</span>
-    <span class="hud-label">SYS // DAN.SANDS</span>
+  <div id="hud-top-left" class="hud hud-tl" aria-hidden="true">
+    <span id="hud-top-left-tick" class="hud-tick">◢</span>
+    <span id="hud-system-label" class="hud-label">SYS // DAN.SANDS</span>
   </div>
-  <div class="hud hud-tr" aria-hidden="true">
-    <span class="hud-label">STATUS: <b class="pulse">ONLINE</b></span>
-    <span class="hud-tick">◣</span>
+  <div id="hud-top-right" class="hud hud-tr" aria-hidden="true">
+    <span id="hud-status-label" class="hud-label">STATUS: <b id="hud-status" class="pulse">ONLINE</b></span>
+    <span id="hud-top-right-tick" class="hud-tick">◣</span>
   </div>
-  <div class="hud hud-bl" aria-hidden="true">
-    <span class="hud-tick">◥</span>
+  <div id="hud-bottom-left" class="hud hud-bl" aria-hidden="true">
+    <span id="hud-bottom-left-tick" class="hud-tick">◥</span>
     <span class="hud-label" id="clock">--:--:-- UTC</span>
   </div>
-  <div class="hud hud-br" aria-hidden="true">
-    <span class="hud-label">COL · CAN · REMOTE</span>
-    <span class="hud-tick">◤</span>
+  <div id="hud-bottom-right" class="hud hud-br" aria-hidden="true">
+    <span id="hud-location" class="hud-label">COL · CAN · REMOTE</span>
+    <span id="hud-bottom-right-tick" class="hud-tick">◤</span>
   </div>
 
-  <section class="hero">
-    <div class="glyph" aria-hidden="true">
-<pre class="ascii-crest">
-        /\
-       /  \
-      / /\ \
-     / /  \ \
-    /_/____\_\
-    \  ____  /
-     \ \  / /
-      \ \/ /
-       \  /
-        \/
-</pre>
+  <section id="hero" class="hero">
+    <div id="hero-crest" class="glyph" aria-hidden="true">
+<pre id="ascii-crest" class="ascii-crest"></pre>
     </div>
 
-    <p class="eyebrow"><span class="bracket">[</span> <span data-i18n="eyebrow">incoming transmission</span> <span class="bracket">]</span></p>
+    <p id="hero-eyebrow" class="eyebrow"><span id="eyebrow-open" class="bracket">[</span> <span id="eyebrow-copy" data-i18n="eyebrow">incoming transmission</span> <span id="eyebrow-close" class="bracket">]</span></p>
 
-    <h1 class="title">
-      <span class="line" data-glitch="DAN SANDS">DAN SANDS</span>
+    <h1 id="hero-title" class="title">
+      <span id="hero-title-line" class="line" data-glitch="DAN SANDS">DAN SANDS</span>
     </h1>
 
-    <p class="tagline">
-      <span data-i18n="tagline_pre">I help teams turn</span> <span class="hot" data-i18n="tagline_hot">chaos</span><span class="tl-break t1" aria-hidden="true"> </span><span data-i18n="tagline_mid">into</span><span class="tl-break t2" aria-hidden="true"> </span><span class="cool" data-i18n="tagline_cool">clear, working systems</span>.
+    <p id="hero-tagline" class="tagline">
+      <span id="tagline-pre" data-i18n="tagline_pre">I help teams turn</span> <span id="tagline-hot" class="hot" data-i18n="tagline_hot">chaos</span><span id="tagline-break-one" class="tl-break t1" aria-hidden="true"> </span><span id="tagline-mid" data-i18n="tagline_mid">into</span><span id="tagline-break-two" class="tl-break t2" aria-hidden="true"> </span><span id="tagline-cool" class="cool" data-i18n="tagline_cool">clear, working systems</span>.
     </p>
 
     <p class="subline" id="rotator">
-      <span class="prompt">&gt;</span> <span id="rotor"></span><span class="caret">▊</span>
+      <span id="rotator-prompt" class="prompt">&gt;</span> <span id="rotor"></span><span id="rotator-caret" class="caret">▊</span>
     </p>
 
-    <div class="cta-row">
+    <div id="hero-actions" class="cta-row">
       <a class="btn btn-primary" id="contact-btn" href="#">
-        <span class="btn-glow"></span>
-        <span class="btn-label" data-i18n="open_channel">open channel</span>
+        <span id="contact-button-glow" class="btn-glow"></span>
+        <span id="contact-button-label" class="btn-label" data-i18n="open_channel">open channel</span>
       </a>
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/DanDataDrivenDreamer" target="_blank" rel="noopener noreferrer">
-        <span class="btn-label">linkedin →</span>
+      <a id="linkedin-link" class="btn btn-ghost" href="https://www.linkedin.com/in/DanDataDrivenDreamer" target="_blank" rel="noopener noreferrer">
+        <span id="linkedin-button-label" class="btn-label">linkedin →</span>
       </a>
     </div>
 
-    <p class="wip">
-      <span class="wip-dot"></span>
-      <span class="wip-text">
-        <span data-i18n="wip_pre">this signal is under construction</span><span class="wip-break" aria-hidden="true"> — </span><span data-i18n="wip_post">phase 01 of many.</span>
+    <p id="wip-notice" class="wip">
+      <span id="wip-dot" class="wip-dot"></span>
+      <span id="wip-text" class="wip-text">
+        <span id="wip-pre" data-i18n="wip_pre">this signal is under construction</span><span id="wip-break" class="wip-break" aria-hidden="true"> — </span><span id="wip-post" data-i18n="wip_post">phase 01 of many.</span>
       </span>
     </p>
   </section>
 
-  <footer class="foot">
-    <span>© <span id="year"></span> DAN SANDS</span>
-    <span class="sep">·</span>
-    <span>built in the open · no trackers · no cookies</span>
+  <footer id="site-footer" class="foot">
+    <span id="copyright">© <span id="year"></span> DAN SANDS</span>
+    <span id="footer-separator" class="sep">·</span>
+    <span id="footer-note">built in the open · no trackers · no cookies</span>
   </footer>
 
   <!-- language + theme selectors (vertically centered, left edge) -->
-  <div class="side-selectors">
+  <div id="side-selectors" class="side-selectors">
     <!-- language selector -->
-    <div class="lang" role="group" aria-label="Language">
-      <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
-      <span class="lang-sep">/</span>
-      <button class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
+    <div id="language-selector" class="lang" role="group" aria-label="Language">
+      <button id="language-en" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+      <span id="language-separator" class="lang-sep">/</span>
+      <button id="language-es" class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
     </div>
 
     <!-- palette selector -->
-    <div class="palette" role="group" aria-label="Color theme">
-      <span class="plabel">theme</span>
-      <button class="swatch sw-aurelius" data-set="aurelius" data-tip="Aurelius · Black + Gold" aria-label="Aurelius Black + Gold theme"></button>
-      <button class="swatch sw-starfield" data-set="starfield" data-tip="Ad Astra · Space + Rockets" aria-label="Ad Astra theme"></button>
-      <button class="swatch sw-forge"    data-set="forge"    data-tip="Forge · Fire Orange Red Yellow" aria-label="Forge theme"></button>
-      <button class="swatch sw-mist"     data-set="mist"     data-tip="Misty Forest · Forest + White Fog" aria-label="Misty Forest theme"></button>
-      <button class="swatch sw-sunset"   data-set="sunset"   data-tip="Sunset · Techy Orange ⇄ Cyan" aria-label="Sunset theme"></button>
-      <button class="swatch sw-dawn"     data-set="dawn"     data-tip="Dawn · Warm Morning" aria-label="Dawn theme"></button>
-      <button class="swatch sw-sahira"   data-set="sahira"   data-tip="Sahira · White · Brown · Copper" aria-label="Sahira theme"></button>
+    <div id="theme-selector" class="palette" role="group" aria-label="Color theme">
+      <span id="theme-selector-label" class="plabel">theme</span>
+      <button id="theme-aurelius" class="swatch sw-aurelius" data-set="aurelius" data-tip="Aurelius · Black + Gold" aria-label="Aurelius Black + Gold theme"></button>
+      <button id="theme-starfield" class="swatch sw-starfield" data-set="starfield" data-tip="Ad Astra · Space + Rockets" aria-label="Ad Astra theme"></button>
+      <button id="theme-forge" class="swatch sw-forge" data-set="forge" data-tip="Forge · Fire Orange Red Yellow" aria-label="Forge theme"></button>
+      <button id="theme-mist" class="swatch sw-mist" data-set="mist" data-tip="Misty Forest · Forest + White Fog" aria-label="Misty Forest theme"></button>
+      <button id="theme-sunset" class="swatch sw-sunset" data-set="sunset" data-tip="Sunset · Techy Orange ⇄ Cyan" aria-label="Sunset theme"></button>
+      <button id="theme-dawn" class="swatch sw-dawn" data-set="dawn" data-tip="Dawn · Warm Morning" aria-label="Dawn theme"></button>
+      <button id="theme-sahira" class="swatch sw-sahira" data-set="sahira" data-tip="Sahira · White · Brown · Copper" aria-label="Sahira theme"></button>
     </div>
   </div>
 
