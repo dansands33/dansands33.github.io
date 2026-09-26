@@ -2,8 +2,8 @@
 
 > **a personal site that refuses to be a personal site.**
 
-This is a focused, privacy-first site with a home introduction, an Experience
-placeholder, and a reusable Coming Soon page, connected by a transparent nav
+This is a focused, privacy-first site with a home introduction, a bilingual
+career experience page, and a reusable Coming Soon page, connected by a transparent nav
 integrated with the HUD. All pages share the seven full-screen canvas themes;
 the landing-page boot sequence plays only for a new tab or after its ten-minute
 session expires.
@@ -23,7 +23,7 @@ static, and served as plain files.
 
 - **Shared navigation** — transparent Home, Experience, and More links integrated with the SYS and STATUS HUD labels.
 - **Home boot sequence** — a faux "initializing signal…" terminal, shown on the first Home visit in a tab and again after ten minutes.
-- **Experience placeholder** — a small terminal-style Coming Soon page with no landing-page crest or hero.
+- **Experience page** — bilingual career snapshot and role narratives, operating approach, education, and English/Spanish resume downloads.
 - **Reusable Coming Soon page** — `coming-soon.html` accepts optional `title` and `message` query parameters, so future sections can use a consistent placeholder (for example, `coming-soon.html?title=Projects&message=Selected+projects+are+being+prepared.`).
 - **HUD frame** — live UTC clock, status ticks, location tag. Pure chrome, pure vibe.
 - **Hero** — ASCII "crest" (one per theme), glitch-on-hover title, tagline, and a
@@ -59,7 +59,7 @@ HTTP so the crest files can load; the site itself is plain HTML, CSS, and JS.
 ```
 dan-sands-site/
 ├── index.html              # home page markup and script order
-├── experience.html         # experience placeholder sharing the runtime and themes
+├── experience.html         # bilingual career page sharing the runtime and themes
 ├── coming-soon.html        # reusable placeholder, configurable with URL parameters
 ├── css/
 │   ├── base.css            # shared layout, HUD, modal, selectors, motion
@@ -76,6 +76,7 @@ dan-sands-site/
 │       ├── sunset.js  ├── forge.js   ├── dawn.js   ├── sahira.js
 │       ├── mist.js   ├── starfield.js  ├── aurelius.js
 ├── assets/crest-src/       # shaded 3D source PNGs for the crests (dev-only)
+├── assets/resume/          # downloadable English and Spanish 2026 resume PDFs
 └── scripts/
     └── ascii_crest.py      # image → ASCII generator (DEV ONLY — not part of the site)
 ```

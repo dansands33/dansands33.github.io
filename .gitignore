@@ -21,7 +21,11 @@ node_modules/
 HANDOVER*.md
 
 # AI-generated source imagery + crest converter output (NOT part of the published site)
-assets/
+assets/*
+# Published resume downloads are intentional site assets.
+!assets/resume/
+assets/resume/*
+!assets/resume/*.pdf
 
 # Python bytecode caches
 __pycache__/

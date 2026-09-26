@@ -59,6 +59,10 @@
       const key = el.getAttribute("data-i18n");
       if (content.I18N[lang][key]) el.textContent = content.I18N[lang][key];
     });
+    document.querySelectorAll("[data-exp]").forEach((el) => {
+      const key = el.getAttribute("data-exp");
+      if (content.I18N[lang][key]) el.textContent = content.I18N[lang][key];
+    });
     document.querySelectorAll(".lang-btn").forEach((b) =>
       b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
     phrases = content.I18N[lang].phrases;
