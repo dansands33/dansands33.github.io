@@ -82,6 +82,7 @@ body{
   background:var(--bg);overflow:hidden;
 }
 body[data-page="experience"] #boot:not(.boot-error-active){display:none}
+body[data-page="coming-soon"] #boot:not(.boot-error-active){display:none}
 #boot.boot-error-active{background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(1px)}
 #boot-panel{
   position:relative;z-index:2;width:max-content;max-width:calc(100vw - 3rem);

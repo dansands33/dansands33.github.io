@@ -2,10 +2,11 @@
 
 > **a personal site that refuses to be a personal site.**
 
-This is a focused, privacy-first two-page site: a home introduction and an
-experience page, connected by a transparent nav integrated with the HUD. Both
-pages share the seven full-screen canvas themes; the landing-page boot sequence
-plays only for a new tab or after its ten-minute session expires.
+This is a focused, privacy-first site with a home introduction, an Experience
+placeholder, and a reusable Coming Soon page, connected by a transparent nav
+integrated with the HUD. All pages share the seven full-screen canvas themes;
+the landing-page boot sequence plays only for a new tab or after its ten-minute
+session expires.
 
 This repo is **exploration**, not production. Phase 01 of many. The point was
 never to finish a resume site — it was to see how far a hero section can be
@@ -20,9 +21,10 @@ technology leader (Product Operations / AI workflow transformation). It renders
 zero third-party scripts, zero trackers, zero cookies. Everything is local,
 static, and served as plain files.
 
-- **Two-page navigation** — transparent Home and Experience links integrated with the SYS and STATUS HUD labels.
+- **Shared navigation** — transparent Home, Experience, and More links integrated with the SYS and STATUS HUD labels.
 - **Home boot sequence** — a faux "initializing signal…" terminal, shown on the first Home visit in a tab and again after ten minutes.
 - **Experience placeholder** — a small terminal-style Coming Soon page with no landing-page crest or hero.
+- **Reusable Coming Soon page** — `coming-soon.html` accepts optional `title` and `message` query parameters, so future sections can use a consistent placeholder (for example, `coming-soon.html?title=Projects&message=Selected+projects+are+being+prepared.`).
 - **HUD frame** — live UTC clock, status ticks, location tag. Pure chrome, pure vibe.
 - **Hero** — ASCII "crest" (one per theme), glitch-on-hover title, tagline, and a
   typewriter subline that rotates through who-I-am phrases.
@@ -39,7 +41,7 @@ Deliberately boring on purpose so the weird stuff stays the star.
 
 | Layer | Choice | Notes |
 |-------|--------|-------|
-| Markup | Plain `index.html` + `experience.html` | No framework, build step, or bundler. |
+| Markup | Plain HTML pages | No framework, build step, or bundler. |
 | Styles | Vanilla CSS + CSS custom properties | All theming is just `--vars` swapped on `[data-theme]`. |
 | Fonts | Space Grotesk · JetBrains Mono · Cinzel (Google Fonts) | Loaded via `<link>`; no JS font loader. |
 | Animation | Canvas 2D (`requestAnimationFrame`) | One shared loop, one canvas, per-theme renderers. |
@@ -57,10 +59,11 @@ HTTP so the crest files can load; the site itself is plain HTML, CSS, and JS.
 ```
 dan-sands-site/
 ├── index.html              # home page markup and script order
-├── experience.html         # experience page sharing the same runtime and theme system
+├── experience.html         # experience placeholder sharing the runtime and themes
+├── coming-soon.html        # reusable placeholder, configurable with URL parameters
 ├── css/
 │   ├── base.css            # shared layout, HUD, modal, selectors, motion
-│   ├── experience.css       # minimal Coming Soon terminal page
+│   ├── placeholder.css      # shared terminal styling for placeholder pages
 │   └── themes/             # one palette file per theme (sets [data-theme] vars)
 │       ├── sunset.css      ├── forge.css     ├── dawn.css
 │       ├── sahira.css      ├── mist.css      ├── starfield.css
@@ -68,6 +71,7 @@ dan-sands-site/
 ├── js/
 │   ├── content.js          # i18n copy and required ASCII crest text-file loader
 │   ├── shared.js           # runtime: boot, loop, i18n, selectors, modal, sparks
+│   ├── coming-soon.js       # safe URL parameter handling for placeholder copy
 │   └── themes/             # one canvas animation per theme (registers on DSS.THEMES)
 │       ├── sunset.js  ├── forge.js   ├── dawn.js   ├── sahira.js
 │       ├── mist.js   ├── starfield.js  ├── aurelius.js
