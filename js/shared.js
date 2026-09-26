@@ -68,6 +68,7 @@
     phrases = content.I18N[lang].phrases;
     restartRotor();
     try { localStorage.setItem("dss-lang", lang); } catch (_) {}
+    document.dispatchEvent(new Event("dss:languagechange"));
   }
 
   /* ---------- rotating subline ---------- */
@@ -285,6 +286,125 @@
   /* ---------- language selector (persisted, default EN) ---------- */
   const langBtns = document.querySelectorAll(".lang-btn");
   langBtns.forEach((b) => b.addEventListener("click", () => applyLang(b.dataset.lang)));
+
+  /* ---------- terminal-style rewrites for the How I Work cards ---------- */
+  const principleCards = document.querySelectorAll(".principle-card");
+  const principleStates = new WeakMap();
+  const localizedCopy = (key) => content.I18N[DSS.lang]?.[key] || "";
+  function typePrincipleText(card, state, nextText) {
+    const output = card.querySelector(".principle-summary");
+    const version = ++state.version;
+    return new Promise((resolve) => {
+      if (reduce) {
+        output.textContent = nextText;
+        return resolve(true);
+      }
+      let removeAt = output.textContent.length;
+      let addAt = 0;
+      const step = () => {
+        if (principleStates.get(card) !== state || state.version !== version) return resolve(false);
+        if (removeAt > 0) {
+          output.textContent = output.textContent.slice(0, --removeAt);
+        } else if (addAt < nextText.length) {
+          output.textContent = nextText.slice(0, ++addAt);
+        } else return resolve(true);
+        state.typeTimer = setTimeout(step, 14);
+      };
+      step();
+    });
+  }
+  async function restorePrincipleText(card, state) {
+    if (!state || state.returning || principleStates.get(card) !== state) return;
+    state.returning = true;
+    clearTimeout(state.autoTimer);
+    const output = card.querySelector(".principle-summary");
+    const index = card.querySelector(".principle-summary")?.dataset.exp.match(/exp_principle_(\d+)_summary/)?.[1] || "1";
+    const returned = await typePrincipleText(card, state, localizedCopy(`exp_principle_returning_${index}`));
+    if (!returned || principleStates.get(card) !== state) return;
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+    const restored = await typePrincipleText(card, state, state.original);
+    if (!restored || principleStates.get(card) !== state) return;
+    output.classList.remove("is-rewriting");
+    principleStates.delete(card);
+    card.open = false;
+  }
+  principleCards.forEach((card) => {
+    card.addEventListener("toggle", () => {
+      const output = card.querySelector(".principle-summary");
+      if (!card.open) {
+        restorePrincipleText(card, principleStates.get(card));
+        return;
+      }
+      const previous = principleStates.get(card);
+      if (previous) {
+        clearTimeout(previous.autoTimer);
+        clearTimeout(previous.typeTimer);
+        previous.version++;
+      }
+      const note = card.querySelector(".principle-note");
+      const state = { original: localizedCopy(output.dataset.exp), version: 0, autoTimer: null, typeTimer: null, returning: false };
+      principleStates.set(card, state);
+      output.classList.add("is-rewriting");
+      typePrincipleText(card, state, localizedCopy(note.dataset.exp)).then((completed) => {
+        if (completed && principleStates.get(card) === state) {
+          state.autoTimer = setTimeout(() => restorePrincipleText(card, state), 10000);
+        }
+      });
+    });
+  });
+  document.addEventListener("dss:languagechange", () => {
+    principleCards.forEach((card) => {
+      const state = principleStates.get(card);
+      if (state) {
+        clearTimeout(state.autoTimer);
+        state.version++;
+        principleStates.delete(card);
+      }
+      card.open = false;
+      const output = card.querySelector(".principle-summary");
+      output.textContent = localizedCopy(output.dataset.exp);
+      output.classList.remove("is-rewriting");
+    });
+  });
+
+  /* ---------- small experience-page easter eggs ---------- */
+  document.addEventListener("click", (event) => {
+    const trigger = event.target.closest(".easter-egg-trigger");
+    document.querySelectorAll(".easter-egg-trigger").forEach((button) => {
+      const open = button === trigger && button.getAttribute("aria-expanded") !== "true";
+      button.setAttribute("aria-expanded", String(open));
+      const message = document.getElementById(button.getAttribute("aria-controls"));
+      if (message) message.hidden = !open;
+    });
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    document.querySelectorAll('.easter-egg-trigger[aria-expanded="true"]').forEach((button) => {
+      button.setAttribute("aria-expanded", "false");
+      const message = document.getElementById(button.getAttribute("aria-controls"));
+      if (message) message.hidden = true;
+      button.focus();
+    });
+  });
+
+  /* ---------- gentle scroll reveals for the Experience finale ---------- */
+  const revealItems = document.querySelectorAll("[data-scroll-reveal]");
+  if (revealItems.length) {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+    } else {
+      document.documentElement.classList.add("scroll-reveal-ready");
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -32px 0px" });
+      revealItems.forEach((item) => revealObserver.observe(item));
+    }
+  }
 
   /* ---------- click sparks (drawn by loop) ---------- */
   let sparks = [];
