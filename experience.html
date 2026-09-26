@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<!-- DAN SANDS // signal — lightweight experience placeholder -->
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>DAN SANDS — experience</title>
-<meta name="description" content="The Dan Sands experience page is coming soon." />
+<meta name="description" content="Daniel Arenas (Dan Sands) — product operations, engineering delivery, and workflow transformation." />
 <meta name="robots" content="index, follow" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;700&family=Cinzel:wght@500;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/base.css" />
@@ -26,56 +24,143 @@
 <canvas id="bg-field" aria-hidden="true"></canvas>
 <div id="scanlines" class="scanlines" aria-hidden="true"></div>
 <div id="grain" class="grain" aria-hidden="true"></div>
-
-<!-- Kept for a clear themed asset-load error; the regular boot animation is home-only. -->
-<div id="boot" class="hidden" aria-hidden="true">
-  <section id="boot-panel" aria-live="polite">
-    <pre id="boot-text"></pre>
-    <div id="boot-error" class="hidden" role="alert">
-      <p id="boot-error-title">THE SIGNAL COULD NOT INITIALIZE</p>
-      <p id="boot-error-detail">Required theme artwork is unavailable.</p>
-      <p id="boot-error-help">Serve this folder over HTTP, then reload the page.</p>
-      <button id="boot-retry" type="button">retry initialization</button>
-    </div>
-  </section>
-</div>
+<div id="boot" class="hidden" aria-hidden="true"><section id="boot-panel" aria-live="polite"><pre id="boot-text"></pre><div id="boot-error" class="hidden" role="alert"><p id="boot-error-title">THE SIGNAL COULD NOT INITIALIZE</p><p id="boot-error-detail">Required theme artwork is unavailable.</p><p id="boot-error-help">Serve this folder over HTTP, then reload the page.</p><button id="boot-retry" type="button">retry initialization</button></div></section></div>
 
 <header id="site-header" class="site-header">
   <div id="site-header-content" class="site-header-content">
-    <div id="site-system" class="site-header-system">
-      <span id="hud-top-left-tick" class="hud-tick" aria-hidden="true">◢</span>
-      <span id="hud-system-label">SYS // DAN.SANDS</span>
-    </div>
+    <div id="site-system" class="site-header-system"><span class="hud-tick" aria-hidden="true">◢</span><span id="hud-system-label">SYS // DAN.SANDS</span></div>
     <nav id="primary-navigation" class="primary-navigation" aria-label="Primary">
-      <a id="nav-home" href="index.html">Home</a>
-      <a id="nav-experience" href="experience.html" aria-current="page">Experience</a>
+      <a id="nav-home" href="index.html" data-exp="exp_nav_home">Home</a>
+      <a id="nav-experience" href="experience.html" aria-current="page" data-exp="exp_nav_experience">Experience</a>
+      <a id="nav-more" href="coming-soon.html?title=More&amp;message=New+pages+and+projects+are+on+the+way." data-exp="exp_nav_more">More</a>
+      <span class="nav-language" role="group" aria-label="Language / Idioma"><button class="nav-lang-btn lang-btn" type="button" data-lang="en" aria-pressed="true">EN</button><span aria-hidden="true">/</span><button class="nav-lang-btn lang-btn" type="button" data-lang="es" aria-pressed="false">ES</button></span>
     </nav>
-    <div id="site-status" class="site-header-status">
-      <span id="hud-status-label">STATUS: <b id="hud-status" class="pulse">ONLINE</b></span>
-      <span id="hud-top-right-tick" class="hud-tick" aria-hidden="true">◣</span>
-    </div>
+    <div id="site-status" class="site-header-status"><span>STATUS: <b class="pulse">ONLINE</b></span><span class="hud-tick" aria-hidden="true">◣</span></div>
   </div>
 </header>
 
 <main id="stage" class="experience-stage">
-  <section id="experience-terminal" class="experience-terminal" aria-labelledby="experience-title">
-    <p id="terminal-path" class="terminal-path">&gt; dan-sands / experience</p>
-    <h1 id="experience-title">Experience</h1>
-    <h2 id="coming-soon-heading">Coming soon</h2>
-    <p id="experience-description" class="terminal-copy">Career history and selected work are being prepared.</p>
-    <p id="experience-status" class="terminal-status">&gt; status: in progress</p>
-    <a id="return-home" class="terminal-link" href="index.html">&gt; return to home</a>
+  <section class="experience-hero" aria-labelledby="experience-title">
+    <p class="experience-eyebrow" data-exp="exp_eyebrow">career record // 2014—now</p>
+    <h1 id="experience-title" data-exp="exp_title">Experience</h1>
+    <p class="experience-lede" data-exp="exp_lede">I connect product intent with engineering delivery—bringing structure to complex work, building reliable systems, and helping teams move with clarity.</p>
+    <div class="resume-actions" aria-label="Resume downloads / Descargas de la hoja de vida">
+      <a class="btn btn-primary" href="assets/resume/Daniel-Arenas-Resume-2026-EN.pdf" download><span class="btn-label" data-exp="exp_download_resume_en">Download in English</span></a>
+      <a class="resume-secondary" href="assets/resume/Daniel-Arenas-Hoja-de-Vida-2026-ES.pdf" download data-exp="exp_download_resume_es">Download in Spanish</a>
+    </div>
+    <p class="experience-aside resume-aside" data-exp="exp_resume_aside">A website resume is more fun to read. But sure, here’s the PDF. Please don’t print it; trees have enough going on.</p>
   </section>
+
+  <section class="career-snapshot" aria-labelledby="snapshot-title">
+    <h2 id="snapshot-title" data-exp="exp_snapshot">Career snapshot</h2>
+    <p class="section-aside" data-exp="exp_snapshot_aside">The short version, for the scroll-impatient.</p>
+    <ol class="snapshot-list">
+      <li><a href="#icesi"><span class="snapshot-role" data-exp="exp_role_monitor_title">Programming Monitor</span><span class="snapshot-meta">Universidad Icesi · Aug 2014—Feb 2018</span></a></li>
+      <li><a href="#leyend"><span class="snapshot-role" data-exp="exp_role_founder_title">Digital Services Manager / Founder</span><span class="snapshot-meta">Leyend Experience · Jan 2018—Sep 2020</span></a></li>
+      <li><a href="#venturit-qa-team-leader"><span class="snapshot-role" data-exp="exp_role_qa_team_leader">Quality Assurance Team Leader</span><span class="snapshot-meta" data-exp="exp_qa_team_leader_snapshot">Venturit · Sep 2020—Jan 2021</span></a></li>
+      <li><a href="#venturit-qa-associate"><span class="snapshot-role" data-exp="exp_role_qa_associate_manager">Quality Assurance Associate Manager</span><span class="snapshot-meta" data-exp="exp_qa_associate_snapshot">Venturit · Jan 2021—Jul 2021</span></a></li>
+      <li><a href="#venturit-global-qa"><span class="snapshot-title-line"><span class="snapshot-role" data-exp="exp_role_qa_manager_title">Quality Assurance Manager</span><span class="role-label" data-exp="exp_global_label">Global</span></span><span class="snapshot-meta" data-exp="exp_qa_manager_snapshot">Venturit · Jul 2021—Feb 2024</span></a></li>
+      <li><a href="#venturit-bsa"><span class="snapshot-title-line"><span class="snapshot-role" data-exp="exp_role_bsa_title">Business Systems Analyst (Co-op)</span><span class="role-label" data-exp="exp_global_label">Global</span></span><span class="snapshot-meta" data-exp="exp_bsa_snapshot">Venturit · Sep 2023—Dec 2023</span></a></li>
+      <li><a href="#venturit-manager"><span class="snapshot-title-line"><span class="snapshot-role" data-exp="exp_role_manager_title">Software Engineering Manager</span><span class="role-label" data-exp="exp_global_label">Global</span></span><span class="snapshot-meta">Venturit · Feb 2024—Aug 2025</span></a></li>
+      <li><a href="#venturit-current"><span class="snapshot-title-line"><span class="snapshot-role" data-exp="exp_role_current_title">Engineering Project Manager</span><span class="role-label" data-exp="exp_global_label">Global</span></span><span class="snapshot-meta">Venturit · Aug 2025—<span data-exp="exp_present">Present</span></span></a></li>
+    </ol>
+  </section>
+
+  <section class="experience-history" aria-labelledby="history-title">
+    <h2 id="history-title" data-exp="exp_selected_work">Selected experience</h2>
+    <p class="section-aside" data-exp="exp_selected_aside">Receipts, if you’re into that sort of thing.</p>
+    <article class="experience-entry" id="icesi">
+      <div class="entry-heading"><p class="entry-date">Aug 2014—Feb 2018</p><h3 data-exp="exp_role_monitor_title">Programming Monitor</h3><p class="entry-company">Universidad Icesi <span data-exp="exp_location_icesi">Valle del Cauca, Colombia</span></p></div>
+      <div class="entry-detail"><h4 data-exp="exp_scope">Scope</h4><p data-exp="exp_role_monitor_scope">Supported Interactive Media Design and Industrial Design students learning programming.</p><h4 data-exp="exp_impact">Impact</h4><p data-exp="exp_role_monitor_impact">Tutored algorithms, HCI, web development, Arduino, and IoT through in-class and extracurricular learning.</p></div>
+    </article>
+    <article class="experience-entry" id="leyend">
+      <div class="entry-heading"><p class="entry-date">Jan 2018—Sep 2020</p><h3 data-exp="exp_role_founder_title">Digital Services Manager / Founder</h3><p class="entry-company">Leyend Experience <span data-exp="exp_location_cali">Cali, Colombia · On-site</span></p></div>
+      <div class="entry-detail"><h4 data-exp="exp_scope">Scope</h4><p data-exp="exp_role_founder_scope">Founded and ran a digital-services business spanning design, software development, and marketing.</p><h4 data-exp="exp_impact">Impact</h4><p data-exp="exp_role_founder_impact">Built brand identities, websites, sales funnels, and business models for 3 companies; automated quoting and assembled project teams for clients in Colombia and Mexico.</p></div>
+    </article>
+    <article class="experience-entry qa-stage" id="venturit-qa-team-leader">
+      <div class="entry-heading"><p class="entry-date" data-exp="exp_qa_team_leader_period">Sep 2020—Jan 2021 · 4 months</p><h3 data-exp="exp_role_qa_team_leader">Quality Assurance Team Leader</h3><p class="entry-company">Venturit Inc. <span data-exp="exp_location_remote">Canada · Colombia · Remote</span></p></div>
+      <div class="entry-detail"><p class="stage-summary" data-exp="exp_qa_team_leader_summary">Joined to strengthen client relationships and establish Venturit’s Eastern QA team. Recruited and trained engineers, improved QA processes, and carried out manual testing and release approvals.</p><h4 data-exp="exp_impact">Impact</h4><p data-exp="exp_qa_team_leader_impact">Improved requirement gathering and QA methods, strengthened sprint-progress metrics, and earned positive feedback from demanding clients during the first months.</p></div>
+    </article>
+    <article class="experience-entry qa-stage" id="venturit-qa-associate">
+      <div class="entry-heading"><p class="entry-date" data-exp="exp_qa_associate_period">Jan 2021—Jul 2021 · 6 months</p><h3 data-exp="exp_role_qa_associate_manager">Quality Assurance Associate Manager</h3><p class="entry-company">Venturit Inc. <span data-exp="exp_location_remote">Canada · Colombia · Remote</span></p></div>
+      <div class="entry-detail"><p class="stage-summary" data-exp="exp_qa_associate_summary">Promoted in January 2021 to continue growing the team, report to senior leadership, and coordinate quality work with developers, product owners, and engineering managers.</p><h4 data-exp="exp_impact">Impact</h4><p data-exp="exp_qa_associate_impact">Introduced ISTQB-aligned standards, improved documentation and confidentiality practices, recruited and mentored 6 engineers across Eastern and Western time zones, and delivered automation and Jira/Xray improvements across 5 projects.</p></div>
+    </article>
+    <article class="experience-entry qa-stage" id="venturit-global-qa">
+      <div class="entry-heading"><p class="entry-date" data-exp="exp_qa_manager_period">Jul 2021—Feb 2024</p><h3><span data-exp="exp_role_qa_manager_title">Quality Assurance Manager</span><span class="easter-egg"><button class="role-label easter-egg-trigger" type="button" data-exp="exp_global_label" aria-expanded="false" aria-controls="global-egg-qa">Global</button><span class="easter-egg-popover" id="global-egg-qa" role="status" data-exp="exp_global_easter_egg" hidden>Global means time zones. So many time zones.</span></span></h3><p class="entry-company">Venturit Inc. <span data-exp="exp_location_remote">Canada · Colombia · Remote</span></p></div>
+      <div class="entry-detail"><p class="stage-summary" data-exp="exp_qa_manager_summary">Led QA across the company, managing the team across 3 time zones and reporting directly to the C-suite.</p><h4 data-exp="exp_impact">Impact</h4><p data-exp="exp_qa_manager_impact">Managed and mentored 16+ onshore and offshore engineers across multiple projects; allocated resources across 5+ projects; opened Venturit’s Canadian QA branch and hired 5 engineers; strengthened privacy, reporting, automation, and release controls.</p><p class="promotion-note" data-exp="exp_qa_progression_note">Career progression: Promoted from QA Team Leader to Associate Manager, then Quality Assurance Manager with global team responsibility.</p><p class="promotion-aside" data-exp="exp_qa_promotion_joke">Promotions: the rare bug that worked as intended.</p></div>
+    </article>
+    <article class="experience-entry" id="venturit-bsa">
+      <div class="entry-heading"><p class="entry-date" data-exp="exp_bsa_period">Sep 2023—Dec 2023 · 4-month co-op · concurrent with QA Manager role</p><h3><span data-exp="exp_role_bsa_title">Business Systems Analyst (Co-op)</span><span class="easter-egg"><button class="role-label easter-egg-trigger" type="button" data-exp="exp_global_label" aria-expanded="false" aria-controls="global-egg-bsa">Global</button><span class="easter-egg-popover" id="global-egg-bsa" role="status" data-exp="exp_global_easter_egg" hidden>Global means time zones. So many time zones.</span></span></h3><p class="entry-company">Venturit Inc. <span data-exp="exp_location_remote">Canada · Colombia · Remote</span></p></div>
+      <div class="entry-detail"><p class="stage-summary" data-exp="exp_bsa_summary">Completed a four-month Business Systems Analyst co-op focused on data governance, integrity, and compliance across client departments.</p><h4 data-exp="exp_impact">Impact</h4><p><span data-exp="exp_bsa_impact_prefix">Reported </span><span class="easter-egg anomaly-egg"><button class="anomaly-trigger easter-egg-trigger" type="button" data-exp="exp_bsa_anomaly_label" aria-expanded="false" aria-controls="bsa-egg-anomalies">229+ anomalies</button><span class="easter-egg-popover" id="bsa-egg-anomalies" role="status" data-exp="exp_bsa_easter_egg" hidden>Found them. Filed them. Politely ruined someone’s spreadsheet.</span></span><span data-exp="exp_bsa_impact_suffix"> across 8 business systems, surfaced accounting-related legal and financial risks, and delivered weekly dashboard reports with actionable insights. Clients recognized the contribution to their 2023 and 2024 financial goals.</span></p></div>
+    </article>
+    <article class="experience-entry" id="venturit-manager">
+      <div class="entry-heading"><p class="entry-date">Feb 2024—Aug 2025</p><h3><span data-exp="exp_role_manager_title">Software Engineering Manager</span><span class="easter-egg"><button class="role-label easter-egg-trigger" type="button" data-exp="exp_global_label" aria-expanded="false" aria-controls="global-egg-manager">Global</button><span class="easter-egg-popover" id="global-egg-manager" role="status" data-exp="exp_global_easter_egg" hidden>Global means time zones. So many time zones.</span></span></h3><p class="entry-company">Venturit Inc. <span data-exp="exp_location_remote">Canada · Colombia · Remote</span></p></div>
+      <div class="entry-detail"><h4 data-exp="exp_scope">Scope</h4><p data-exp="exp_role_manager_scope">Led additional engineering teams while retaining QA leadership, and supported team operations across Canada and Colombia.</p><h4 data-exp="exp_impact">Impact</h4><p data-exp="exp_role_manager_impact">Improved resource allocation and security practices, led client proposals, and recovered projects facing management constraints or development issues.</p></div>
+    </article>
+    <article class="experience-entry" id="venturit-current">
+      <div class="entry-heading"><p class="entry-date">Aug 2025—<span data-exp="exp_present">Present</span></p><h3><span data-exp="exp_role_current_title">Engineering Project Manager</span><span class="easter-egg"><button class="role-label easter-egg-trigger" type="button" data-exp="exp_global_label" aria-expanded="false" aria-controls="global-egg-current">Global</button><span class="easter-egg-popover" id="global-egg-current" role="status" data-exp="exp_global_easter_egg" hidden>Global means time zones. So many time zones.</span></span></h3><p class="entry-company">Venturit Inc. <span data-exp="exp_location_remote">Canada · Colombia · Remote</span></p></div>
+      <div class="entry-detail"><h4 data-exp="exp_scope">Scope</h4><p data-exp="exp_role_current_scope">Leads engineering delivery, product operations, software quality, workflow improvement, and cross-functional execution.</p><h4 data-exp="exp_impact">Impact</h4><p data-exp="exp_role_current_impact">Turns ambiguous requirements and delivery risks into execution plans, documented workflows, and dependable product outcomes; builds automation frameworks and tests across manual, API, and performance layers.</p></div>
+    </article>
+  </section>
+
+  <section class="operating-note" aria-labelledby="approach-title">
+    <h2 id="approach-title" data-exp="exp_approach">How I work</h2>
+    <p class="section-aside" data-exp="exp_field_guide_hint">Select a card to open its field note.</p>
+    <div class="principle-grid">
+      <details class="principle-card" data-scroll-reveal>
+        <summary><span class="ascii-mark" aria-hidden="true">[01]</span><span class="principle-copy"><span class="principle-title" data-exp="exp_principle_1_title">Make work visible</span><span class="principle-summary" data-exp="exp_principle_1_summary">Goals, owners, dependencies, and risks—out where everyone can see them.</span></span><span class="principle-toggle" aria-hidden="true">[ + ]</span></summary>
+        <p class="principle-note" data-exp="exp_principle_1_note" hidden>Invisible work has a suspicious habit of catching fire.</p>
+      </details>
+      <details class="principle-card" data-scroll-reveal>
+        <summary><span class="ascii-mark" aria-hidden="true">[02]</span><span class="principle-copy"><span class="principle-title" data-exp="exp_principle_2_title">Surface risks early</span><span class="principle-summary" data-exp="exp_principle_2_summary">Give people time to respond before a small warning becomes a whole meeting.</span></span><span class="principle-toggle" aria-hidden="true">[ + ]</span></summary>
+        <p class="principle-note" data-exp="exp_principle_2_note" hidden>Bad news gets less expensive when it arrives on time.</p>
+      </details>
+      <details class="principle-card" data-scroll-reveal>
+        <summary><span class="ascii-mark" aria-hidden="true">[03]</span><span class="principle-copy"><span class="principle-title" data-exp="exp_principle_3_title">Make delivery workable</span><span class="principle-summary" data-exp="exp_principle_3_summary">Turn ambiguity into a clear next step the team can actually take.</span></span><span class="principle-toggle" aria-hidden="true">[ + ]</span></summary>
+        <p class="principle-note" data-exp="exp_principle_3_note" hidden>Fewer heroic all-nighters. More predictable progress.</p>
+      </details>
+      <details class="principle-card" data-scroll-reveal>
+        <summary><span class="ascii-mark" aria-hidden="true">[04]</span><span class="principle-copy"><span class="principle-title" data-exp="exp_principle_4_title">Automate the friction</span><span class="principle-summary" data-exp="exp_principle_4_summary">Use automation and AI where they remove real effort, with quality and usability in the loop.</span></span><span class="principle-toggle" aria-hidden="true">[ + ]</span></summary>
+        <p class="principle-note" data-exp="exp_principle_4_note" hidden>If a task is boring twice, perhaps let a robot inherit it.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="education" aria-labelledby="education-title">
+    <h2 id="education-title" data-exp="exp_education">Education</h2>
+    <p class="section-aside" data-exp="exp_education_guide_hint">Honors are clickable. Yes, really.</p>
+    <ol class="education-ledger">
+      <li class="education-card" data-scroll-reveal>
+        <span class="edu-index" aria-hidden="true">{01}</span><p class="edu-date" data-exp="exp_education_icesi_dates">2013—2019</p>
+        <h3 data-exp="exp_education_icesi_degree">Interactive Media Design</h3><p class="edu-school" data-exp="exp_education_icesi_school">Universidad Icesi</p>
+        <div class="edu-badges"><span class="edu-badge" data-exp="exp_education_gpa87">GPA 87%</span><span class="easter-egg"><button class="credential-badge easter-egg-trigger" type="button" data-exp="exp_education_cum_laude" aria-expanded="false" aria-controls="edu-egg-icesi">Cum Laude</button><span class="easter-egg-popover" id="edu-egg-icesi" role="status" data-exp="exp_education_cum_egg" hidden>Achievement unlocked: distinction earned. No extra lives included.</span></span></div>
+      </li>
+      <li class="education-card" data-scroll-reveal>
+        <span class="edu-index" aria-hidden="true">{02}</span><p class="edu-date" data-exp="exp_education_telematics_dates">2014—2017</p>
+        <h3 data-exp="exp_education_telematics_degree">Telematics Engineering</h3><p class="edu-school" data-exp="exp_education_icesi_school">Universidad Icesi</p>
+        <div class="edu-badges edu-roast-badges">
+          <span class="easter-egg"><button class="credential-badge edu-gpa-trigger easter-egg-trigger" type="button" data-exp="exp_education_gpa_roast_label" aria-expanded="false" aria-controls="edu-egg-tele-gpa">GPA: ??%</button><span class="easter-egg-popover" id="edu-egg-tele-gpa" role="status" data-exp="exp_education_laude_roast" hidden>Probably would’ve graduated cum laude too.</span></span>
+          <span class="easter-egg"><button class="credential-badge easter-egg-trigger" type="button" data-exp="exp_education_cable_label" aria-expanded="false" aria-controls="edu-egg-cables">Google it?</button><span class="easter-egg-popover" id="edu-egg-cables" role="status" data-exp="exp_education_cable_egg" hidden>It was a bad idea. I was already a superb designer and developer to connect cables for life. Regardless, all the professors used to ask us to Google it anyway.</span></span>
+          <span class="easter-egg"><button class="edu-info-trigger easter-egg-trigger" type="button" aria-label="Program note / Nota del programa" aria-expanded="false" aria-controls="edu-egg-tele-info"><span aria-hidden="true">i</span></button><span class="easter-egg-popover" id="edu-egg-tele-info" role="status" data-exp="exp_education_tele_info" hidden>Small apology for the roast: Telematics is an excellent program, and I had lovely professors who supported me through some of my toughest years.</span></span>
+        </div>
+      </li>
+      <li class="education-card" data-scroll-reveal>
+        <span class="edu-index" aria-hidden="true">{03}</span><p class="edu-date" data-exp="exp_education_humber_dates">2022—2023</p>
+        <h3 data-exp="exp_education_humber_degree">Business Insights &amp; Analytics</h3><p class="edu-school" data-exp="exp_education_humber_school">Humber College</p>
+        <div class="edu-badges"><span class="edu-badge" data-exp="exp_education_gpa89">GPA 89%</span><span class="easter-egg"><button class="credential-badge easter-egg-trigger" type="button" data-exp="exp_education_honors" aria-expanded="false" aria-controls="edu-egg-humber">Dean’s Honour List</button><span class="easter-egg-popover" id="edu-egg-humber" role="status" data-exp="exp_education_honors_egg" hidden>Academic side quest: completed.</span></span></div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="experience-cta" data-scroll-reveal>
+    <div class="cta-copy"><p class="cta-kicker" data-exp="exp_contact_signal">OUTBOUND SIGNAL // LINKEDIN</p><div class="signal-beacon" aria-hidden="true"><span>&lt;&lt;</span><b>●</b><span>&gt;&gt;</span><i class="signal-bars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></i></div><h2 data-exp="exp_contact_title">Have a delightfully complicated problem?</h2><p data-exp="exp_contact_copy">Let’s talk about making the work clearer and the systems stronger.</p></div>
+    <a class="btn btn-primary cta-transmit" href="https://www.linkedin.com/in/DanDataDrivenDreamer" target="_blank" rel="noopener noreferrer"><span class="btn-label" data-exp="exp_contact">Connect on LinkedIn</span><span class="cta-arrow" aria-hidden="true">↗</span></a>
+  </section>
+  <footer class="experience-footer"><a href="index.html" data-exp="exp_home">Back to home</a><span class="footer-note"><span data-exp="exp_footer_built">Built in the open</span> · <span data-exp="exp_footer_no_trackers">No trackers · no cookies</span> <span class="easter-egg"><button class="footer-egg-trigger easter-egg-trigger" type="button" aria-expanded="false" aria-controls="footer-egg">[?]</button><span class="easter-egg-popover" id="footer-egg" role="status" data-exp="exp_footer_egg" hidden>No trackers. Several tabs, probably.</span></span></span><span>© <span id="year"></span> DAN SANDS</span></footer>
 </main>
 
 <script src="js/content.js"></script>
-<script src="js/themes/sunset.js"></script>
-<script src="js/themes/forge.js"></script>
-<script src="js/themes/dawn.js"></script>
-<script src="js/themes/sahira.js"></script>
-<script src="js/themes/mist.js"></script>
-<script src="js/themes/starfield.js"></script>
-<script src="js/themes/aurelius.js"></script>
+<script src="js/themes/sunset.js"></script><script src="js/themes/forge.js"></script><script src="js/themes/dawn.js"></script><script src="js/themes/sahira.js"></script><script src="js/themes/mist.js"></script><script src="js/themes/starfield.js"></script><script src="js/themes/aurelius.js"></script>
 <script src="js/shared.js"></script>
 </body>
 </html>

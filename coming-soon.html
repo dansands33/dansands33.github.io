@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!-- DAN SANDS // signal — reusable terminal-style placeholder -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DAN SANDS — coming soon</title>
+<meta name="description" content="A new part of the Dan Sands site is coming soon." />
+<meta name="robots" content="index, follow" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;700&family=Cinzel:wght@500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/placeholder.css" />
+<link rel="stylesheet" href="css/themes/sunset.css" />
+<link rel="stylesheet" href="css/themes/forge.css" />
+<link rel="stylesheet" href="css/themes/dawn.css" />
+<link rel="stylesheet" href="css/themes/sahira.css" />
+<link rel="stylesheet" href="css/themes/mist.css" />
+<link rel="stylesheet" href="css/themes/starfield.css" />
+<link rel="stylesheet" href="css/themes/aurelius.css" />
+</head>
+<body data-page="coming-soon">
+<canvas id="bg-field" aria-hidden="true"></canvas>
+<div id="scanlines" class="scanlines" aria-hidden="true"></div>
+<div id="grain" class="grain" aria-hidden="true"></div>
+
+<!-- Shared runtime uses this only if required theme artwork cannot load. -->
+<div id="boot" class="hidden" aria-hidden="true">
+  <section id="boot-panel" aria-live="polite">
+    <pre id="boot-text"></pre>
+    <div id="boot-error" class="hidden" role="alert">
+      <p id="boot-error-title">THE SIGNAL COULD NOT INITIALIZE</p>
+      <p id="boot-error-detail">Required theme artwork is unavailable.</p>
+      <p id="boot-error-help">Serve this folder over HTTP, then reload the page.</p>
+      <button id="boot-retry" type="button">retry initialization</button>
+    </div>
+  </section>
+</div>
+
+<header id="site-header" class="site-header">
+  <div id="site-header-content" class="site-header-content">
+    <div id="site-system" class="site-header-system">
+      <span id="hud-top-left-tick" class="hud-tick" aria-hidden="true">◢</span>
+      <span id="hud-system-label">SYS // DAN.SANDS</span>
+    </div>
+    <nav id="primary-navigation" class="primary-navigation" aria-label="Primary">
+      <a id="nav-home" href="index.html" data-i18n="nav_home">Home</a>
+      <a id="nav-experience" href="experience.html" data-i18n="nav_experience">Experience</a>
+      <a id="nav-more" href="coming-soon.html?title=More&amp;message=New+pages+and+projects+are+on+the+way." aria-current="page" data-i18n="nav_more">More</a>
+      <span class="nav-language" role="group" aria-label="Language / Idioma"><button class="nav-lang-btn lang-btn" type="button" data-lang="en" aria-pressed="true">EN</button><span aria-hidden="true">/</span><button class="nav-lang-btn lang-btn" type="button" data-lang="es" aria-pressed="false">ES</button></span>
+    </nav>
+    <div id="site-status" class="site-header-status">
+      <span id="hud-status-label">STATUS: <b id="hud-status" class="pulse">ONLINE</b></span>
+      <span id="hud-top-right-tick" class="hud-tick" aria-hidden="true">◣</span>
+    </div>
+  </div>
+</header>
+
+<main id="stage" class="placeholder-stage">
+  <section id="placeholder-terminal" class="placeholder-terminal" aria-labelledby="placeholder-title">
+    <p id="placeholder-path" class="terminal-path">&gt; dan-sands / <span id="placeholder-route">more</span></p>
+    <h1 id="placeholder-title">More</h1>
+    <h2 id="coming-soon-heading">Coming soon</h2>
+    <p id="placeholder-description" class="terminal-copy">New pages and projects are on the way.</p>
+    <p id="placeholder-status" class="terminal-status">&gt; status: in progress</p>
+    <a id="return-home" class="terminal-link" href="index.html">&gt; return to home</a>
+  </section>
+</main>
+
+<script src="js/content.js"></script>
+<script src="js/themes/sunset.js"></script>
+<script src="js/themes/forge.js"></script>
+<script src="js/themes/dawn.js"></script>
+<script src="js/themes/sahira.js"></script>
+<script src="js/themes/mist.js"></script>
+<script src="js/themes/starfield.js"></script>
+<script src="js/themes/aurelius.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/coming-soon.js"></script>
+</body>
+</html>
